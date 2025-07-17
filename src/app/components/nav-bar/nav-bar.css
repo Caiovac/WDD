@@ -24,3 +24,6 @@
   margin-left: 220px;
   padding: 1rem;
 }
+.app-sidenav-container { height: 100vh; }
+.app-sidenav { width: 240px; }
+.app-content { padding: 16px; }

@@ -4,6 +4,11 @@ import { CommonModule }                     from '@angular/common';
 import { RouterModule }                     from '@angular/router';
 import { filter }                           from 'rxjs/operators';
 
+// Material
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule }    from '@angular/material/list';
+
 interface MenuItem {
   label: string;
   link: string;
@@ -12,7 +17,7 @@ interface MenuItem {
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [ CommonModule, RouterModule ],
+  imports: [ CommonModule, RouterModule, MatSidenavModule, MatToolbarModule, MatListModule ],
   templateUrl: './nav-bar.html',
   styleUrls: ['./nav-bar.css']
 })
