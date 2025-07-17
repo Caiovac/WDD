@@ -15,5 +15,5 @@ import { NavBar }           from './components/nav-bar/nav-bar';
   styleUrls: ['./app.css']      // nota il plurale: styleUrls
 })
 export class App {
-  protected readonly title = signal('ECSP');
+  protected readonly title = signal('WDD');
 }

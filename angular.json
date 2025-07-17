@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ECSP": {
+    "WDD": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -57,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ECSP:build:production"
+              "buildTarget": "WDD:build:production"
             },
             "development": {
-              "buildTarget": "ECSP:build:development"
+              "buildTarget": "WDD:build:development"
             }
           },
           "defaultConfiguration": "development"
