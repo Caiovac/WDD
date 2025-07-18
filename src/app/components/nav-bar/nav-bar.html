@@ -1,19 +1,39 @@
 <mat-sidenav-container class="app-sidenav-container">
-  <mat-sidenav mode="side" opened class="app-sidenav">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
+  <!-- SIDEBAR -->
+  <mat-sidenav
+    #drawer
+    class="app-sidenav"
+    [mode]="isHandset ? 'over' : 'side'"
+    [(opened)]="opened"
+    (closedStart)="opened = false"
+  >
+    <mat-toolbar color="primary">
+      Caio & Tatiana
+      <button mat-icon-button *ngIf="isHandset" (click)="drawer.close()" style="margin-left:auto">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
     <mat-nav-list>
       <a
         mat-list-item
         *ngFor="let item of menuItems"
         [routerLink]="item.link"
         routerLinkActive="active"
+        (click)="isHandset ? drawer.close() : null"
       >
         {{ item.label }}
       </a>
     </mat-nav-list>
   </mat-sidenav>
 
+  <!-- CONTENUTO PRINCIPALE -->
   <mat-sidenav-content class="app-content">
+    <mat-toolbar color="primary">
+      <!-- BOTTONE HAMBURGER SEMPRE VISIBILE -->
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,0 +1,35 @@
+.hero-background {
+  min-height: 80vh;
+  width: 100%;
+  background: url('/foto1.jpeg') center center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.hero-overlay {
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  padding: 48px 32px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.15);
+}
+
+.hero-title {
+  font-family: 'Pacifico', cursive, sans-serif;
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.hero-date {
+  font-size: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.hero-location {
+  font-size: 1.2rem;
+  font-weight: 400;
+  opacity: 0.95;
+}

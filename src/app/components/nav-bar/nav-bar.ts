@@ -8,6 +8,10 @@ import { filter }                           from 'rxjs/operators';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule }    from '@angular/material/list';
+import { MatIconModule }   from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { BreakpointObserver, Breakpoints, LayoutModule } from '@angular/cdk/layout';
+
 
 interface MenuItem {
   label: string;
@@ -17,13 +21,16 @@ interface MenuItem {
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [ CommonModule, RouterModule, MatSidenavModule, MatToolbarModule, MatListModule ],
+  imports: [ CommonModule, RouterModule, MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule, MatButtonModule, LayoutModule ],
   templateUrl: './nav-bar.html',
   styleUrls: ['./nav-bar.css']
 })
 export class NavBar implements OnInit {
   menuItems: MenuItem[] = [];
+  isHandset = false;
+  opened = true; // Aperto di default su desktop
 
+  // **QUI dentro la classe!**
   private stdItems: MenuItem[] = [
     { label: 'Home',      link: '/std/home' },
     { label: 'Our Story', link: '/std/our-story' },
@@ -39,23 +46,30 @@ export class NavBar implements OnInit {
     { label: 'Gallery',    link: '/prm/gallery' },
   ];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit() {
+    // Responsive: true se mobile/tablet, false se desktop
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isHandset = result.matches;
+        this.opened = !this.isHandset; // Chiudi di default su mobile, apri su desktop
+      });
+
+    // Menù dinamico (uguale a prima)
     const updateMenu = (url: string) => {
       this.menuItems = url.startsWith('/prm')
         ? this.prmItems
         : this.stdItems;
     };
 
-    // 1) Imposta subito il menu in base all'URL corrente
     updateMenu(this.router.url);
-
-    // 2) Ogni volta che cambia rotta, ricomputa il menu
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe((e: NavigationEnd) => {
-        // usa urlAfterRedirects per sicurezza
         const activeUrl = e.urlAfterRedirects || e.url;
         updateMenu(activeUrl);
       });
