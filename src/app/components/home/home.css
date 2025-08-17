@@ -1,35 +1,162 @@
+/* ===== Hero ===== */
 .hero-background {
-  min-height: 80vh;
-  width: 100%;
-  background: url('/foto1.jpeg') center center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 420px;
+  overflow: hidden;
 }
+
+/* Sfondo fisso effetto parallax */
+.hero-bg-parallax {
+  position: absolute;
+  top: 0; left: auto !important; right: auto !important; width: 100%; height: 100%;
+  background-image: url('/foto1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: calc(50% + 80px) 70%;
+  z-index: 1;
+  will-change: background-position;
+}
+
+/* Overlay sopra la foto (per i nomi) */
 .hero-overlay {
-  background: rgba(0,0,0,0.45);
-  color: #fff;
-  padding: 48px 32px;
-  border-radius: 18px;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-names-img {
+  position: fixed;
+  margin-top: 350px;
+  max-width: 800px;
+  width: 90vw;
+  filter: drop-shadow(0 2px 16px #0006);
+  background-attachment: fixed;
+}
+
+/* ===== Sezione evento che sale sopra ===== */
+.section-scroll-over {
+  position: relative;
+  z-index: 10;
+  background: #f4eadb;
+  margin-top: -90px; /* sovrappone la sezione precedente */
+  border-top-left-radius: 48px;
+  border-top-right-radius: 48px;
+  box-shadow: 0 -8px 32px #0002;
+  padding: 64px 0 0 0;
+  min-height: 70vh;
+  animation: fadeInUp 1s;
+}
+
+/* Animazione ingresso */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Testi info evento ===== */
+.hero-info {
   text-align: center;
-  box-shadow: 0 6px 32px 0 rgba(0,0,0,0.15);
+  margin-top:-60px;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
 }
 
-.hero-title {
-  font-family: 'Pacifico', cursive, sans-serif;
-  font-size: 3.2rem;
-  margin-bottom: 1rem;
-  letter-spacing: 2px;
+.hero-save-date {
+  font-size: 1.6rem;
+  margin-bottom: 0.6rem;
+  color: #af4261;
 }
 
-.hero-date {
-  font-size: 1.5rem;
-  margin-bottom: 0.7rem;
+.hero-address {
+  font-size: 1.15rem;
+  margin-bottom: 1.2rem;
+  color: #af4261;
 }
 
-.hero-location {
-  font-size: 1.2rem;
-  font-weight: 400;
-  opacity: 0.95;
+.hero-message {
+  font-size: 2.2rem;
+  color: #af4261;
+  border-radius: 12px;
+  padding: 10px auto 50px;
+  display: inline-block;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  letter-spacing: 1.2px;
+}
+
+/* ===== iPhone / mobile stretto ===== */
+@media (max-width: 960px) {
+  /* azzera lo shift orizzontale usato sul desktop */
+  :root{
+    --shift-x: 0px;
+  }
+
+  /* usa 100svh per l'altezza reale della viewport mobile */
+  .hero-background{
+    height: 100svh;
+    min-height: 520px;
+  }
+
+  /* su iOS il fixed dà problemi -> usa scroll e centra */
+  .hero-bg-parallax{
+    background-attachment: scroll;
+    background-position: 50% 38%;
+  }
+
+  /* scritta: niente fixed su mobile, posizionamento fluido */
+  .hero-overlay{ justify-content: flex-start; }
+
+  .hero-names-img{
+    position: absolute;     /* invece di fixed */
+    top: clamp(64px, 36vh, 320px);             /* non “scappa” verso l’alto */
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92vw, 560px);
+    max-width: 560px;
+    /* opzionale: margine extra per la notch */
+    margin-top: env(safe-area-inset-top, 0px);
+  }
+
+  /* blocco info più compatto e con radius */
+  .section-scroll-over{
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    padding-top: clamp(24px, 4vh, 48px);
+    margin-top: -64px;        /* sovrappone l’hero con curva morbida */
+    min-height: auto;         /* si adatta al contenuto */
+    overflow: hidden;         /* taglia agli angoli tondi */
+  }
+
+  /* tipografia responsive */
+  .hero-save-date{
+    font-size: clamp(1.2rem, 3.8vw, 1.6rem);
+  }
+  .hero-address{
+    font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+  }
+  .hero-message{
+    font-size: clamp(1.2rem, 4.5vw, 1.8rem);
+    margin: 0px 0 48px;
+  }
+  .hero-info {
+  text-align: center;
+  margin-top: -10px;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+}
+
 }

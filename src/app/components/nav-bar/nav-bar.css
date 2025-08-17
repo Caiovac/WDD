@@ -1,29 +1,126 @@
-.sidebar {
-  position: fixed;
-  top: 0; bottom: 0;
-  width: 200px;
-  background: #f4f4f4;
-  padding: 1rem;
-}
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-.sidebar li {
-  margin-bottom: 0.5rem;
-}
-.sidebar a {
-  text-decoration: none;
-  color: #333;
-}
-.sidebar a.active {
-  font-weight: bold;
+/* Stacking sicuro del drawer */
+.mat-drawer-backdrop { z-index: 1000 !important; }
+.mat-sidenav,
+.app-sidenav       { z-index: 1100 !important; }
+
+/* Layout Angular Material */
+.app-sidenav-container {
+  min-height: 100vh;  
+  height: 100vh;
+  background: #f6efe5 !important;    /* Beige delicato */
+  overflow-x: hidden !important;
+
 }
 
-.content {
-  margin-left: 220px;
-  padding: 1rem;
+.app-sidenav {
+  width: 15%;
+  background: #dea193 !important;
+  color: #fff;
+  box-shadow: 2px 0 14px 0 #0001;
+  border-radius: 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif !important;
+  overflow-x: hidden !important;
+  min-width: 240px; max-width: 320px;
 }
-.app-sidenav-container { height: 100vh; }
-.app-sidenav { width: 240px; }
-.app-content { padding: 16px; }
+/* ===== Responsive nav ===== */
+@media (max-width: 959px) {
+  .app-sidenav {
+    width: 80% !important;   /* prende tutta la larghezza */
+    max-width: 100% !important;
+  }
+}
+
+.mat-drawer-inner-container {
+  overflow-x: hidden !important;
+}
+
+/* Voci del menu sempre bianche, centrali e con spaziatura verticale */
+.app-sidenav .mat-mdc-list-item,
+.app-sidenav .mat-mdc-list-item .mdc-list-item__primary-text,
+.app-sidenav .mat-mdc-list-item .mat-mdc-list-item-unscoped-content,
+.app-sidenav .mat-mdc-list-item span {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important; /* Safari fix */
+  justify-content: center !important;
+  text-align: center !important;
+  margin: 18px 0 !important;   /* Spazio tra le voci */
+  min-height: 48px !important; /* Più spazio verticale */
+  letter-spacing: 1px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px !important;
+
+}
+
+
+
+/* Hover/active: sfondo rosa chiaro, radius elegante */
+.app-sidenav .mat-mdc-list-item.active,
+.app-sidenav .mat-mdc-list-item:focus,
+.app-sidenav .mat-mdc-list-item:hover {
+  border-radius: 16px !important;
+  color: #fff !important;
+  outline: none !important;
+  
+}
+
+.app-sidenav .mat-mdc-list-item.active .mdc-list-item__primary-text,
+.app-sidenav .mat-mdc-list-item.active .mat-mdc-list-item-unscoped-content,
+.app-sidenav .mat-mdc-list-item:focus .mdc-list-item__primary-text,
+.app-sidenav .mat-mdc-list-item:hover .mdc-list-item__primary-text {
+  color: #fff !important;
+}
+
+/* Contenuto principale */
+.app-content {
+  background: #f6efe5 !important;
+  min-height: 100vh;
+  padding: 0px ;
+  
+}
+
+/* Bottone hamburger mobile flottante */
+.floating-hamburger {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  z-index: 200;
+  background: rgba(255,255,255,0.23) !important;
+  box-shadow: 0 2px 12px #0002;
+  border-radius: 9px;
+  backdrop-filter: blur(2px);
+}
+
+/* Toolbar mini (solo se serve) */
+.mini-toolbar {
+  min-height: 38px !important;
+  height: 38px !important;
+  box-shadow: none;
+  background: transparent !important;
+}
+
+.sidebar-logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 15px !important;
+
+}
+
+.sidebar-logo img {
+  max-width: 300px;      /* regola la dimensione a piacere */
+  max-height: 180px;
+  border-radius: 16px;   /* opzionale, solo se vuoi effetto arrotondato */
+}
+.app-content, .mat-sidenav-content, .hero-background, .hero-bg-img, .hero-no-padding {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  box-sizing: border-box;
+}

@@ -33,18 +33,19 @@ export class NavBar implements OnInit {
   // **QUI dentro la classe!**
   private stdItems: MenuItem[] = [
     { label: 'Home',      link: '/std/home' },
-    { label: 'Our Story', link: '/std/our-story' },
+    { label: 'Storia', link: '/std/our-story' },
     { label: 'Regali',    link: '/std/regali' },
   ];
 
   private prmItems: MenuItem[] = [
     { label: 'Home',      link: '/prm/home' },
-    { label: 'Our Story', link: '/prm/our-story' },
+    { label: 'Storia', link: '/prm/our-story' },
     { label: 'Regali',    link: '/prm/regali' },
     { label: 'Itinerario', link: '/prm/itinerario' },
-    { label: 'Menu',       link: '/prm/menu' },
-    { label: 'Gallery',    link: '/prm/gallery' },
+    { label: 'Galleria',    link: '/prm/gallery' },
   ];
+
+  private static readonly MOBILE_QUERY = '(max-width: 959.98px)';
 
   constructor(
     private router: Router,
@@ -52,20 +53,23 @@ export class NavBar implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Responsive: true se mobile/tablet, false se desktop
-    this.breakpointObserver.observe([Breakpoints.Handset])
-      .subscribe(result => {
-        this.isHandset = result.matches;
-        this.opened = !this.isHandset; // Chiudi di default su mobile, apri su desktop
+    // 1) stato iniziale coerente
+    const m = window.matchMedia(NavBar.MOBILE_QUERY).matches;
+    this.isHandset = m;
+    this.opened = !m; // desktop aperto, mobile chiuso
+
+    // 2) osserva UN solo breakpoint
+    this.breakpointObserver
+      .observe([NavBar.MOBILE_QUERY])
+      .subscribe(s => {
+        this.isHandset = s.matches;
+        this.opened = !this.isHandset;
       });
 
-    // Menù dinamico (uguale a prima)
+    // --- resto del tuo codice (menu dinamico) ---
     const updateMenu = (url: string) => {
-      this.menuItems = url.startsWith('/prm')
-        ? this.prmItems
-        : this.stdItems;
+      this.menuItems = url.startsWith('/prm') ? this.prmItems : this.stdItems;
     };
-
     updateMenu(this.router.url);
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))

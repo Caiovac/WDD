@@ -2,3 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.app-sidenav .mdc-list-item__primary-text,
+.app-sidenav .mat-mdc-list-item .mdc-list-item__primary-text {
+  font-family: 'Cinzel', serif !important;
+  font-size: 1.35rem !important;
+  color: #fff !important;
+}
