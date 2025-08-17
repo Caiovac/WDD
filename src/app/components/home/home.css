@@ -46,13 +46,34 @@
   position: relative;
   z-index: 10;
   background: #f4eadb;
-  margin-top: -90px; /* sovrappone la sezione precedente */
+  margin-top: -90px;
   border-top-left-radius: 48px;
   border-top-right-radius: 48px;
   box-shadow: 0 -8px 32px #0002;
   padding: 64px 0 0 0;
   min-height: 70vh;
   animation: fadeInUp 1s;
+}
+.section-scroll-over > * { position: relative; z-index: 1; }
+
+/* lascia lo stacking sopra SOLO ai figli che NON sono l'immagine */
+.section-scroll-over { position: relative; }
+.section-scroll-over > *:not(.scroll-over-img) {
+  position: relative;
+  z-index: 2;
+}
+.bp-frame{
+  width: min(90vw, 1400px);
+  margin: -20px auto 28px;        /* vicino al titolo */
+  overflow: hidden;           /* taglia i bordi trasparenti */
+  border-radius: 8px;         /* se vuoi bordi arrotondati */
+}
+/* immagine nel flusso, centrata e proporzionata */
+.scroll-over-img{
+  display: block;
+  width: 100%;
+  transform: translateY(-100px);  /* alza finché il bordo sparisce */
+  /* se serve anche a sinistra/destra puoi usare scale e translateX */
 }
 
 /* Animazione ingresso */
@@ -94,17 +115,26 @@
   padding: 10px auto 50px;
   display: inline-block;
   margin-top: 30px;
-  margin-bottom: 50px;
+  margin-bottom: 0px;
   letter-spacing: 1.2px;
 }
+@media (max-width: 1600px) {
+  .bp-frame{ width: min(92vw, 800px); 
+  
+    margin: 20px auto 28px;        /* vicino al titolo */
+}
 
+
+}
 /* ===== iPhone / mobile stretto ===== */
 @media (max-width: 960px) {
   /* azzera lo shift orizzontale usato sul desktop */
   :root{
     --shift-x: 0px;
   }
-
+  
+  .bp-frame{ width: min(92vw, 800px); }
+  .scroll-over-img{ transform: translateY(-40px); }
   /* usa 100svh per l'altezza reale della viewport mobile */
   .hero-background{
     height: 100svh;
@@ -158,5 +188,26 @@
   font-family: 'Cinzel', serif;
   letter-spacing: 1px;
 }
+/* ===== Mobile: ≤600 → “verticale” 600×904 ===== */
+@media (max-width: 600px){
+  .bp-frame{
+    position: relative;
+    width: min(600px, 92vw); /* larghezza mobile */
+    height: 904px;           /* altezza voluta */
+    margin: -12px auto 24px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
 
+  .scroll-over-img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: auto;
+    height: 904px;           /* base per la scala */
+    max-width: none;         /* evita limiti ereditati */
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.70);
+    transform-origin: 50% 50%;
+  }
+}
 }
