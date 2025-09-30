@@ -1,1 +1,128 @@
-<p>regali works!</p>
+<!-- HERO -->
+<section class="gifts-hero">
+  <div class="gifts-hero__bg" role="img" aria-label="Foto Caio & Tatiana"></div>
+  <div class="gifts-hero__overlay">
+    <h1 class="gifts-hero__title">I Regali</h1>
+    <p class="gifts-hero__subtitle">Il regalo più grande siete voi. Se desiderate, potete contribuire al nostro viaggio di nozze. </p>
+  </div>
+</section>
+
+<!-- CONTENUTO -->
+<section class="gifts-section">
+  <div class="gifts-grid">
+    <!-- COLONNA SINISTRA: IBAN / CAUSALE / QR -->
+    <mat-card class="iban-card">
+      <mat-card-header>
+        <div mat-card-avatar class="iban-card__avatar">€</div>
+        <mat-card-title>Bonifico IBAN</mat-card-title>
+        <mat-card-subtitle>Modalità preferita</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="iban-box">
+          <div class="iban-box__label">Intestatario</div>
+          <div class="iban-box__value">{{ beneficiary }}</div>
+
+          <div class="iban-box__label">IBAN</div>
+          <div class="iban-row">
+            <code class="iban">{{ formattedIban }}</code>
+            <button mat-icon-button aria-label="Copia IBAN" (click)="copy(ibanRaw)">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+
+          <div class="iban-box__label">Banca</div>
+          <div class="iban-box__value">{{ bankName }}</div>
+
+          <div class="iban-box__label">Causale consigliata</div>
+          <div class="iban-row">
+            <code class="iban-cause">{{ cause }}</code>
+            <button mat-icon-button aria-label="Copia causale" (click)="copy(cause)">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+
+          <div class="amounts">
+            <span class="amounts__label">Importo rapido:</span>
+            <button mat-stroked-button *ngFor="let a of amounts" (click)="pickAmount(a)">
+              {{ a | currency:'EUR':'symbol':'1.0-0' }}
+            </button>
+            <button mat-stroked-button (click)="pickAmount(null)">Altro</button>
+          </div>
+
+          <div class="qr-wrap" *ngIf="showQr && qrSrc">
+            <img [src]="qrSrc" width="220" height="220" alt="QR per dati bonifico" />
+            <div class="qr-caption">Scansiona per i dettagli del bonifico*</div>
+          </div>
+          <small class="qr-note" *ngIf="showQr">*Il QR contiene IBAN, intestatario e causale.</small>
+        </div>
+
+        <ul class="howto">
+          <li><strong>Intestatario:</strong> {{ beneficiary }}</li>
+          <li><strong>IBAN:</strong> {{ formattedIban }}</li>
+          <li><strong>Banca:</strong> {{ bankName }}</li>
+          <li><strong>Causale:</strong> {{ cause }}</li>
+        </ul>
+      </mat-card-content>
+
+      <mat-card-actions >
+        <button mat-raised-button color="primary" (click)="toggleQr()">
+          {{ showQr ? 'Nascondi QR' : 'Mostra QR' }}
+        </button>
+        <button mat-raised-button (click)="copyFull()">Copia tutti i dati</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- COLONNA DESTRA: FOTO / IDEE REGALO -->
+    <div class="right-col">
+      <mat-card class="photo-card">
+        <img mat-card-image src="/regali-hero.jpg" alt="Noi due" />
+        <mat-card-content>
+          <p class="caption">Ogni pensiero sarà parte del nostro viaggio. Grazie di cuore! 🤍</p>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="ideas">
+        <h2 class="ideas__title">Idee regalo (ispirazioni)</h2>
+        <div class="ideas-grid">
+          <mat-card class="idea">
+            <img mat-card-image src="/idee/viaggio.jpg" alt="Esperienza viaggio" />
+            <mat-card-title>Esperienza viaggio</mat-card-title>
+            <mat-card-subtitle>Treno panoramico / escursione</mat-card-subtitle>
+          </mat-card>
+          <mat-card class="idea">
+            <img mat-card-image src="/idee/cena.jpg" alt="Cena speciale" />
+            <mat-card-title>Cena speciale</mat-card-title>
+            <mat-card-subtitle>Un brindisi in più per noi</mat-card-subtitle>
+          </mat-card>
+          <mat-card class="idea">
+            <img mat-card-image src="/idee/spa.jpg" alt="Relax & Spa" />
+            <mat-card-title>Relax & Spa</mat-card-title>
+            <mat-card-subtitle>Un giorno di coccole</mat-card-subtitle>
+          </mat-card>
+          <mat-card class="idea">
+            <img mat-card-image src="/idee/memorie.jpg" alt="Ricordi" />
+            <mat-card-title>Ricordi</mat-card-title>
+            <mat-card-subtitle>Album / stampa foto</mat-card-subtitle>
+          </mat-card>
+        </div>
+      </div>
+
+      <mat-accordion class="faq">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Serve specificare indirizzo o altro?</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>No, con IBAN e causale è sufficiente. Se desideri lasciare un messaggio, aggiungilo nella causale. 🥰</p>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Preferite buste o bonifico?</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>Come preferisci: il bonifico ci aiuta a organizzare meglio il viaggio, ma ogni gesto è benvenuto.</p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</section>

@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './our-story.css'
 })
 export class OurStory {
+  scrollTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 }

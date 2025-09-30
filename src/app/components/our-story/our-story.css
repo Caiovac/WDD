@@ -1,0 +1,117 @@
+:root{
+  --bg-dark: #1c1c1c;
+  --text: #e9e3db;
+  --muted: #bfb6a8;
+  --accent: #af8f6f; /* tono caldo elegante */
+}
+
+.story-hero{
+  color: #af4261 !important;
+  background: #fdfaf4;
+  color: var(--text);
+  padding: clamp(72px, 9vh, 140px) 16px 48px;
+  text-align: center;
+}
+
+.story-container{
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.story-kicker{
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: clamp(.72rem, .9vw, .85rem);
+  color: var(--muted);
+  margin: 0 0 10px;
+    color: #000000;
+
+}
+
+.story-title{
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  line-height: 1.15;
+  color: var(--text);
+  margin: 0 0 14px;
+}
+
+.story-divider{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 12px auto 28px;
+}
+.story-divider::before,
+.story-divider::after{
+  content:"";
+  display:block;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: .8;
+}
+.story-divider .dot{
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  display:inline-block;
+}
+
+.story-lead{
+  line-height: 1.8;
+  font-size: clamp(0.98rem, 1.35vw, 1.08rem);
+  color: var(--muted);
+  margin: 0 auto;
+  max-width: 900px;
+    color: #000000;
+
+}
+
+/* Foto full-bleed con altezza consistente e crop controllabile */
+.story-photo{ 
+  margin:0; 
+  background: #fff8f6; /* tono caldo al posto del nero pieno */
+  overflow:hidden;
+  block-size: clamp(420px, 80vh, 1100px);
+}
+.story-photo img{
+  display:block; inline-size:100%; block-size:100%;
+  object-fit:cover; object-position:50% 0%;
+}
+/* Mobile: altezza un po’ più bassa e focus leggermente più alto */
+@media (max-width: 860px){
+  .story-photo{ block-size: clamp(260px, 48vh, 560px); }
+  .story-photo img{ object-position: 50% 40%; }
+}
+
+
+/* Footer “torna su” */
+.story-footer{
+  background: #fdfaf4;
+  color: var(--muted);
+  text-align: center;
+  padding: 28px 12px 64px;
+    color: #af4261;
+
+}
+.back-top{
+  all: unset;
+  display: inline-grid;
+  place-items: center;
+  width: 36px; height: 36px;
+  border: 1px solid #ffffff22;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: transform .15s ease, background .15s ease;
+}
+.back-top:hover{ transform: translateY(-2px); background:#ffffff08; }
+.back-top-label{ cursor: pointer; }
+
+@media (max-width: 600px){
+  .story-photo img{ max-height: 52vh; }
+}
