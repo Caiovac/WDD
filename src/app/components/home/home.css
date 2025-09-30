@@ -15,7 +15,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  background-position: calc(50% + 80px) 70%;
+  background-position: calc(50%) 90%;
   z-index: 1;
   will-change: background-position;
 }
@@ -35,7 +35,7 @@
 .hero-names-img {
   position: fixed;
   margin-top: 350px;
-  max-width: 800px;
+  max-width: 900px;
   width: 90vw;
   filter: drop-shadow(0 2px 16px #0006);
   background-attachment: fixed;
@@ -45,13 +45,13 @@
 .section-scroll-over {
   position: relative;
   z-index: 10;
-  background: #f4eadb;
+  background: #0E294D;
   margin-top: -90px;
   border-top-left-radius: 48px;
   border-top-right-radius: 48px;
   box-shadow: 0 -8px 32px #0002;
   padding: 64px 0 0 0;
-  min-height: 70vh;
+  min-height: 7ì80vh;
   animation: fadeInUp 1s;
 }
 .section-scroll-over > * { position: relative; z-index: 1; }
@@ -97,20 +97,20 @@
 }
 
 .hero-save-date {
-  font-size: 1.6rem;
-  margin-bottom: 0.6rem;
-  color: #af4261;
+  font-size: 2.6rem;
+  margin-bottom: 2.6rem;
+  color: #ffffff;
 }
 
 .hero-address {
-  font-size: 1.15rem;
-  margin-bottom: 1.2rem;
-  color: #af4261;
+  font-size: 2.15rem;
+  padding-bottom: 4.2rem;
+  color: #ffffff;
 }
 
 .hero-message {
   font-size: 2.2rem;
-  color: #af4261;
+  color: #ffffff;
   border-radius: 12px;
   padding: 10px auto 50px;
   display: inline-block;

@@ -7,16 +7,17 @@
 .app-sidenav-container {
   min-height: 100vh;  
   height: 100vh;
-  background: #f6efe5 !important;    /* Beige delicato */
-  overflow-x: hidden !important;
+  background: transparent !important;
+  overflow-x: visible !important;
 
 }
 
 .app-sidenav {
-  width: 15%;
-  background: #dea193 !important;
-  color: #fff;
-  box-shadow: 2px 0 14px 0 #0001;
+  width: 40%;
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  border-right: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);  color: #fff;
   border-radius: 0 !important;
   display: flex;
   flex-direction: column;
@@ -24,12 +25,12 @@
   justify-content: center;
   font-family: 'Cinzel', serif !important;
   overflow-x: hidden !important;
-  min-width: 240px; max-width: 320px;
+  min-width: 240px; max-width: 400px;
 }
 /* ===== Responsive nav ===== */
 @media (max-width: 959px) {
   .app-sidenav {
-    width: 80% !important;   /* prende tutta la larghezza */
+    width: 75% !important;   /* prende tutta la larghezza */
     max-width: 100% !important;
   }
 }
@@ -120,7 +121,21 @@
   border-radius: 16px;   /* opzionale, solo se vuoi effetto arrotondato */
 }
 .app-content, .mat-sidenav-content, .hero-background, .hero-bg-img, .hero-no-padding {
-  overflow-x: hidden !important;
+  overflow-x: visible !important;
   max-width: 100vw !important;
   box-sizing: border-box;
 }
+.mat-sidenav-content {
+  background: transparent !important;
+  padding: 0 !important;
+  overflow-x: visible !important;  /* <-- prima era hidden */
+}
+
+/* Sidebar trasparente sopra l’immagine */
+.app-sidenav {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Backdrop (mobile) trasparente */
+.mat-drawer-backdrop { background: transparent !important; }
