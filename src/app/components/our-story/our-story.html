@@ -15,27 +15,40 @@
   <!-- Sostituisci con la tua foto -->
   <img src="/Prayer.png" alt="Noi due" loading="lazy" decoding="async"/>
 </figure>
-<section class="story-hero" id="top">
-  <div class="story-container">
-    <p class="story-lead">
-      Quando ci siamo conosciuti non immaginavamo che un giorno avremmo vissuto il nostro grande sogno: il matrimonio.
-      Il giorno si avvicina, il cuore batte forte e scorrono i ricordi di tutto ciò che abbiamo vissuto e costruito.
-      È bello ricordare ogni piccolo pezzo della nostra storia d’amore.
-    </p>
-    <figure class="story-photo">
-  <!-- Sostituisci con la tua foto -->
-  <img src="/Prayer.png" alt="Noi due" loading="lazy" decoding="async"/>
-</figure>
-    <p class="story-lead">
-      Quando ci siamo conosciuti non immaginavamo che un giorno avremmo vissuto il nostro grande sogno: il matrimonio.
-      Il giorno si avvicina, il cuore batte forte e scorrono i ricordi di tutto ciò che abbiamo vissuto e costruito.
-      È bello ricordare ogni piccolo pezzo della nostra storia d’amore.
+<section class="place-hero">
+  <div class="place-container">
+    <p class="place-kicker">IL NOSTRO LUOGO</p>
+    <h2 class="place-title">Il luogo dove tutto è iniziato</h2>
+
+    <p class="place-lead">
+      Tra queste luci e queste canzoni ci siamo incontrati. In mezzo alle preghiere,
+      agli abbracci della domenica e ai sorrisi dopo il culto, è nato qualcosa di semplice e forte.
+      Qui abbiamo imparato a servire, a credere insieme, a dire “ci sono” l’uno per l’altra.
+      Ogni volta che entriamo in chiesa, ritroviamo quel primo sguardo e capiamo che casa non è solo un posto:
+      è la presenza di Dio e le persone accanto a noi.
     </p>
   </div>
 </section>
 
+<figure class="place-photo">
+  <!-- Sostituisci con la foto della vostra chiesa -->
+  <img src="assets/church.jpg" alt="Hillsong — la nostra casa">
+  <figcaption>Hillsong — la nostra casa, il posto del nostro “sì”.</figcaption>
+</figure>
+
+
 
 <div class="story-footer">
-  <button class="back-top" (click)="scrollTop()" aria-label="Torna all’inizio">↑</button>
-  <span class="back-top-label" (click)="scrollTop()">Torna su</span>
+<!-- Pulsante Torna su (overlay) -->
+<button
+  class="backtotop"
+  [class.visible]="showBackTop"
+  (click)="scrollTop()"
+  aria-label="Torna all’inizio"
+  title="Torna all’inizio">
+  <!-- se usi Angular Material puoi mettere <mat-icon>keyboard_arrow_up</mat-icon> -->
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M12 8l-6 6h4v6h4v-6h4z" fill="currentColor"/>
+  </svg>
+</button>  <span class="back-top-label" (click)="scrollTop()">Torna su</span>
 </div>

@@ -1,68 +1,99 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { FormsModule } from '@angular/forms';
 
-type Config = {
-  beneficiary: string;
-  bankName: string;
-  iban: string;   // raw, senza spazi
-  defaultCause: string;
-  qrImagePath?: string; // es: '/qr-iban.png' generato da te in locale
-};
-
-const CONFIG: Config = {
-  beneficiary: 'Caio & Tatiana',
-  bankName: 'Banca di Esempio',
-  iban: 'IT60X0542811101000000123456', // <-- SOSTITUISCI CON IL TUO
-  defaultCause: 'Regalo matrimonio – Caio & Tatiana',
-  qrImagePath: '/qr-iban.png'          // opzionale: metti un PNG locale
-};
+type Idea = { id: string; name: string; img: string };
 
 @Component({
   selector: 'app-regali',
   standalone: true,
   templateUrl: './regali.html',
   styleUrls: ['./regali.css'],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatSnackBarModule,
-  ],
+  imports: [CommonModule, FormsModule],
 })
 export class Regali {
+  // === DATI VOSTRI ===
+  beneficiary = ' Monica Tatiana Mantilla Doce';
+  bankName    = 'Banca Popolare di Sondrio';
+  ibanRaw     = 'IT02J0569611009CCI000114942'; // <-- SOSTITUISCI
+  defaultCause = 'Regalo matrimonio — Caio & Tatiana';
+  qrSrc       = '/qr-iban-fake.png'; // opzionale
+  amounts     = [30, 50, 100, 200];
 
-  beneficiary = CONFIG.beneficiary;
-  bankName = CONFIG.bankName;
-  ibanRaw = CONFIG.iban.toUpperCase().replace(/\s+/g, '');
-  cause = CONFIG.defaultCause;
+  // === IDEE (mini immagine + nome) ===
+  ideas: Idea[] = [
+    { id: 'viaggio',  name: 'Viaggio Nozze', img: 'viaggio.jpg' },
+    { id: 'cena',     name: 'Cena speciale',      img: 'cena.jpg' },
+    { id: 'casa',      name: 'Casa',        img: 'casa.jpg' },
+  ];
 
-  amounts = [50, 100, 150, 200];
+  // === Stato selezioni ===
+  selectedIdeaId: string | null = null;
+  customIdeaEnabled = false;
+  customIdea = '';
+
+  selectedAmount: number | null = null;
+  customAmountEnabled = false;
+  customAmount: number | null = null;
+
+  // === UI ===
+  cause = this.defaultCause;
   showQr = false;
-  qrSrc = CONFIG.qrImagePath ?? '';
+  toastVisible = false;
+  toastMessage = 'Copiato!';
 
-  constructor(private snack: MatSnackBar){}
-
+  // IBAN formattato 4-4-4…
   get formattedIban(): string {
-    return this.ibanRaw.replace(/(.{4})/g, '$1 ').trim();
+    return this.ibanRaw.toUpperCase().replace(/\s+/g, '').replace(/(.{4})/g, '$1 ').trim();
   }
 
-  pickAmount(val: number | null){
-    this.cause = val
-      ? `${CONFIG.defaultCause} – €${val}`
-      : CONFIG.defaultCause;
+  // ====== Interazioni ======
+  pickIdea(it: Idea){
+    this.selectedIdeaId = it.id;
+    this.customIdeaEnabled = false;
+    this.customIdea = '';
+    this.updateCause();
   }
 
+  enableCustomIdea(){
+    this.customIdeaEnabled = true;
+    this.selectedIdeaId = null;
+    this.updateCause();
+  }
+
+  pickAmount(val: number){
+    this.selectedAmount = val;
+    this.customAmountEnabled = false;
+    this.customAmount = null;
+    this.updateCause();
+  }
+
+  enableCustomAmount(){
+    this.customAmountEnabled = true;
+    this.selectedAmount = null;
+    this.updateCause();
+  }
+
+  updateCause(){
+    const ideaText = this.customIdeaEnabled
+      ? (this.customIdea ?? '').trim()
+      : (this.selectedIdeaId
+          ? (this.ideas.find(i => i.id === this.selectedIdeaId)?.name ?? '')
+          : '');
+
+    const amountVal = this.customAmountEnabled
+      ? (this.customAmount ?? 0)
+      : (this.selectedAmount ?? 0);
+
+    const ideaPart   = ideaText ? ` — ${ideaText}` : '';
+    const amountPart = amountVal > 0 ? ` — €${Math.round(amountVal)}` : '';
+
+    this.cause = `${this.defaultCause}${ideaPart}${amountPart}`;
+  }
+
+  // ====== Azioni utili ======
   copy(text: string){
-    navigator.clipboard.writeText(text).then(() => {
-      this.snack.open('Copiato negli appunti', 'OK', { duration: 1800 });
-    });
+    navigator.clipboard.writeText(text).then(() => this.showToast('Copiato negli appunti'));
   }
 
   copyFull(){
@@ -70,12 +101,16 @@ export class Regali {
       `Intestatario: ${this.beneficiary}`,
       `IBAN: ${this.formattedIban}`,
       `Banca: ${this.bankName}`,
-      `Causale: ${this.cause}`
+      `Causale: ${this.cause}`,
     ].join('\n');
     this.copy(all);
   }
 
-  toggleQr(){
-    this.showQr = !this.showQr;
+  toggleQr(){ this.showQr = !this.showQr; }
+
+  private showToast(msg: string){
+    this.toastMessage = msg;
+    this.toastVisible = true;
+    setTimeout(() => (this.toastVisible = false), 1600);
   }
 }

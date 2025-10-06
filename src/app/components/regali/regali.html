@@ -1,128 +1,116 @@
 <!-- HERO -->
-<section class="gifts-hero">
-  <div class="gifts-hero__bg" role="img" aria-label="Foto Caio & Tatiana"></div>
-  <div class="gifts-hero__overlay">
-    <h1 class="gifts-hero__title">I Regali</h1>
-    <p class="gifts-hero__subtitle">Il regalo più grande siete voi. Se desiderate, potete contribuire al nostro viaggio di nozze. </p>
+<section class="regali-hero">
+  <img class="regali-hero__img" src="/regali.jpeg" alt="Caio & Tatiana" />
+  <div class="regali-hero__overlay"></div>
+  <div class="regali-hero__content">
+    <div class="eyebrow">CON IL VOSTRO AFFETTO</div>
+    <h1 class="title">I REGALI</h1>
+    <p class="lead">Il regalo più grande siete voi. 🤍</p>
   </div>
 </section>
 
-<!-- CONTENUTO -->
-<section class="gifts-section">
-  <div class="gifts-grid">
-    <!-- COLONNA SINISTRA: IBAN / CAUSALE / QR -->
-    <mat-card class="iban-card">
-      <mat-card-header>
-        <div mat-card-avatar class="iban-card__avatar">€</div>
-        <mat-card-title>Bonifico IBAN</mat-card-title>
-        <mat-card-subtitle>Modalità preferita</mat-card-subtitle>
-      </mat-card-header>
+<section class="container">
+  <!-- CARD IBAN -->
+  <article class="iban-card">
+    <header class="iban-card__head">
+      <div class="coin">€</div>
+      <div class="iban-card__titles">
+        <h2>Bonifico IBAN</h2>
+      </div>
+    </header>
 
-      <mat-card-content>
-        <div class="iban-box">
-          <div class="iban-box__label">Intestatario</div>
-          <div class="iban-box__value">{{ beneficiary }}</div>
+    <div class="iban-box">
+      <div class="row">
+        <div class="label">Intestatario</div>
+        <div class="value">{{ beneficiary }}</div>
+      </div>
 
-          <div class="iban-box__label">IBAN</div>
-          <div class="iban-row">
-            <code class="iban">{{ formattedIban }}</code>
-            <button mat-icon-button aria-label="Copia IBAN" (click)="copy(ibanRaw)">
-              <mat-icon>content_copy</mat-icon>
-            </button>
-          </div>
-
-          <div class="iban-box__label">Banca</div>
-          <div class="iban-box__value">{{ bankName }}</div>
-
-          <div class="iban-box__label">Causale consigliata</div>
-          <div class="iban-row">
-            <code class="iban-cause">{{ cause }}</code>
-            <button mat-icon-button aria-label="Copia causale" (click)="copy(cause)">
-              <mat-icon>content_copy</mat-icon>
-            </button>
-          </div>
-
-          <div class="amounts">
-            <span class="amounts__label">Importo rapido:</span>
-            <button mat-stroked-button *ngFor="let a of amounts" (click)="pickAmount(a)">
-              {{ a | currency:'EUR':'symbol':'1.0-0' }}
-            </button>
-            <button mat-stroked-button (click)="pickAmount(null)">Altro</button>
-          </div>
-
-          <div class="qr-wrap" *ngIf="showQr && qrSrc">
-            <img [src]="qrSrc" width="220" height="220" alt="QR per dati bonifico" />
-            <div class="qr-caption">Scansiona per i dettagli del bonifico*</div>
-          </div>
-          <small class="qr-note" *ngIf="showQr">*Il QR contiene IBAN, intestatario e causale.</small>
-        </div>
-
-        <ul class="howto">
-          <li><strong>Intestatario:</strong> {{ beneficiary }}</li>
-          <li><strong>IBAN:</strong> {{ formattedIban }}</li>
-          <li><strong>Banca:</strong> {{ bankName }}</li>
-          <li><strong>Causale:</strong> {{ cause }}</li>
-        </ul>
-      </mat-card-content>
-
-      <mat-card-actions >
-        <button mat-raised-button color="primary" (click)="toggleQr()">
-          {{ showQr ? 'Nascondi QR' : 'Mostra QR' }}
-        </button>
-        <button mat-raised-button (click)="copyFull()">Copia tutti i dati</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <!-- COLONNA DESTRA: FOTO / IDEE REGALO -->
-    <div class="right-col">
-      <mat-card class="photo-card">
-        <img mat-card-image src="/regali-hero.jpg" alt="Noi due" />
-        <mat-card-content>
-          <p class="caption">Ogni pensiero sarà parte del nostro viaggio. Grazie di cuore! 🤍</p>
-        </mat-card-content>
-      </mat-card>
-
-      <div class="ideas">
-        <h2 class="ideas__title">Idee regalo (ispirazioni)</h2>
-        <div class="ideas-grid">
-          <mat-card class="idea">
-            <img mat-card-image src="/idee/viaggio.jpg" alt="Esperienza viaggio" />
-            <mat-card-title>Esperienza viaggio</mat-card-title>
-            <mat-card-subtitle>Treno panoramico / escursione</mat-card-subtitle>
-          </mat-card>
-          <mat-card class="idea">
-            <img mat-card-image src="/idee/cena.jpg" alt="Cena speciale" />
-            <mat-card-title>Cena speciale</mat-card-title>
-            <mat-card-subtitle>Un brindisi in più per noi</mat-card-subtitle>
-          </mat-card>
-          <mat-card class="idea">
-            <img mat-card-image src="/idee/spa.jpg" alt="Relax & Spa" />
-            <mat-card-title>Relax & Spa</mat-card-title>
-            <mat-card-subtitle>Un giorno di coccole</mat-card-subtitle>
-          </mat-card>
-          <mat-card class="idea">
-            <img mat-card-image src="/idee/memorie.jpg" alt="Ricordi" />
-            <mat-card-title>Ricordi</mat-card-title>
-            <mat-card-subtitle>Album / stampa foto</mat-card-subtitle>
-          </mat-card>
+      <div class="row">
+        <div class="label">IBAN</div>
+        <div class="value value--code">
+          <code>{{ formattedIban }}</code>
+          <button class="icon-btn" (click)="copy(ibanRaw)" aria-label="Copia IBAN">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          </button>
         </div>
       </div>
 
-      <mat-accordion class="faq">
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Serve specificare indirizzo o altro?</mat-panel-title>
-          </mat-expansion-panel-header>
-          <p>No, con IBAN e causale è sufficiente. Se desideri lasciare un messaggio, aggiungilo nella causale. 🥰</p>
-        </mat-expansion-panel>
+      <div class="row">
+        <div class="label">Banca</div>
+        <div class="value">{{ bankName }}</div>
+      </div>
 
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Preferite buste o bonifico?</mat-panel-title>
-          </mat-expansion-panel-header>
-          <p>Come preferisci: il bonifico ci aiuta a organizzare meglio il viaggio, ma ogni gesto è benvenuto.</p>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <!-- CAUSALE (auto-aggiornata) -->
+      <div class="row">
+        <div class="label">Causale</div>
+        <div class="value value--code">
+          <code>{{ cause }}</code>
+          <button class="icon-btn" (click)="copy(cause)" aria-label="Copia causale">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- IDEE REGALO -->
+      <div class="block-title">Idea regalo</div>
+      <div class="ideas-select">
+        <button
+          class="idea-chip"
+          *ngFor="let it of ideas"
+          [class.active]="selectedIdeaId === it.id"
+          (click)="pickIdea(it)"
+        >
+          <img [src]="it.img" [alt]="it.name" />
+          <span>{{ it.name }}</span>
+        </button>
+
+        <button class="idea-chip idea-chip--altro" [class.active]="customIdeaEnabled" (click)="enableCustomIdea()">
+          <span>Altro…</span>
+        </button>
+      </div>
+
+      <div class="custom-idea" *ngIf="customIdeaEnabled">
+        <input type="text"
+               placeholder="Scrivi qui la tua idea regalo…"
+               [(ngModel)]="customIdea"
+               (input)="updateCause()" />
+      </div>
+
+      <!-- IMPORTI -->
+      <div class="quick">
+        <span class="muted">Importo:</span>
+        <button class="chip" *ngFor="let a of amounts"
+                [class.active]="selectedAmount === a"
+                (click)="pickAmount(a)">€ {{ a }}</button>
+
+        <button class="chip chip--ghost" [class.active]="customAmountEnabled" (click)="enableCustomAmount()">
+          Altro importo…
+        </button>
+      </div>
+
+      <div class="custom-amount" *ngIf="customAmountEnabled">
+        <label>
+          € <input type="number" min="1" step="1" inputmode="numeric"
+                   [(ngModel)]="customAmount"
+                   (input)="updateCause()"
+                   placeholder="es. 180" />
+        </label>
+        <br>
+        <small class="muted">L’importo personalizzato verrà aggiunto alla causale.</small>
+      </div>
+
+      <div class="actions">
+        <button class="btn" (click)="copyFull()">Copia tutti i dati</button>
+        <button class="btn btn--ghost" (click)="toggleQr()">{{ showQr ? 'Nascondi QR' : 'Mostra QR' }}</button>
+      </div>
+
+      <div class="qr" *ngIf="showQr && qrSrc">
+        <img [src]="qrSrc" width="220" height="220" alt="QR con dati bonifico" />x\
+        <div class="qr-note">Contiene IBAN, intestatario e causale.</div>
+      </div>
     </div>
-  </div>
+  </article>
 </section>
+
+<!-- Toast -->
+<div class="toast" [class.show]="toastVisible">{{ toastMessage }}</div>

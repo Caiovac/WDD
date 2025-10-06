@@ -115,3 +115,87 @@
 @media (max-width: 600px){
   .story-photo img{ max-height: 52vh; }
 }
+/* Sezione luogo */
+.place-hero{
+  background: var(--bg-dark);
+  color: var(--text);
+  text-align: center;
+  padding: clamp(56px, 10vh, 120px) 16px 24px;
+}
+.place-container{ max-width: 960px; margin: 0 auto; }
+.place-kicker{
+  letter-spacing: .26em; text-transform: uppercase;
+  font-size: clamp(.72rem, .9vw, .85rem); color: var(--muted); margin-bottom: 10px;
+}
+.place-title{
+  font-family: 'Cinzel', serif; font-weight: 700;
+  font-size: clamp(2rem, 3.6vw, 2.8rem); margin: 0 0 14px;
+  color: var(--text);
+}
+.place-lead{
+  line-height: 1.9; color: var(--muted);
+  font-size: clamp(.98rem, 1.2vw, 1.08rem); max-width: 900px; margin: 0 auto;
+}
+
+/* Foto della chiesa */
+.place-photo{ margin:0; background:#000; overflow:hidden; }
+.place-photo img{
+  display:block; inline-size:100%; block-size: clamp(380px, 70vh, 980px);
+  object-fit: cover; object-position: 50% 45%; /* sposta il focus se serve */
+}
+.place-photo figcaption{
+  background: var(--bg-dark); color: var(--muted);
+  text-align:center; padding: 14px 12px 40px; font-size:.95rem;
+}
+@media (max-width: 960px){
+  .place-photo img{ block-size: clamp(300px, 58vh, 760px); object-position: 50% 50%; }
+}
+/* --- Back to top flottante --- */
+.backtotop{
+  position: fixed;
+  right: clamp(16px, 2.5vw, 28px);
+  bottom: clamp(16px, 2.8vw, 32px);
+  z-index: 1400;
+  width: 52px; height: 52px;
+  border: 0; border-radius: 999px;
+  display: grid; place-items: center;
+  color: #fff;
+  background: rgba(20,20,20,.32);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+  cursor: pointer;
+
+  /* stato iniziale: nascosto */
+  opacity: 0; transform: translateY(10px) scale(.96);
+  pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease, box-shadow .22s ease, background .22s ease;
+}
+
+.backtotop.visible{
+  opacity: 1; transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.backtotop svg{
+  width: 26px; height: 26px;
+}
+
+.backtotop:hover{ 
+  background: rgba(20,20,20,.42);
+  box-shadow: 0 14px 30px rgba(0,0,0,.28);
+}
+
+.backtotop:active{
+  transform: translateY(1px) scale(.98);
+}
+
+.backtotop:focus-visible{
+  outline: 2px solid #af8f6f;           /* il tuo accent */
+  outline-offset: 3px;
+}
+
+/* riduci animazioni se l’utente lo chiede */
+@media (prefers-reduced-motion: reduce){
+  .backtotop{ transition: none; }
+}

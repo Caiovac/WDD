@@ -11,8 +11,26 @@
    <div class="bp-frame">
       <img class="scroll-over-img" src="/boarding.png" alt="Save the Date">
     </div>
-    <div class="hero-save-date">Save the date: 22 November 2025</div>
-    <div class="hero-address">Address: Warehouse, via Feltre 32, Milan</div>
+<div class="hero-actions">
+  <p class="hero-note">Siamo emozionatissimi e stiamo contando i giorni ✨</p>
+
+<button
+  mat-flat-button
+  class="btn-rose"
+  [routerLink]="['/', basePrefix, 'our-story']"
+  aria-label="Vai alla nostra storia"
+  [style.--mat-button-filled-container-color]="'#AF4261'"
+  [style.--mat-button-filled-label-text-color]="'#FFFFFF'"
+  [style.--mat-button-filled-container-height]="'100px'"
+  [style.--mat-button-filled-container-width]="'150px'">
+  La nostra storia <span class="arrow" aria-hidden="true">↘</span>
+</button>
+
+
+</div>
+
+
+
   </div>
 </div>
 
