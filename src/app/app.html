@@ -2,3 +2,6 @@
 <div class="content">
   <router-outlet></router-outlet>
 </div>
+
+
+<app-page-loader [active]="(loader$ | async) ?? false"></app-page-loader>

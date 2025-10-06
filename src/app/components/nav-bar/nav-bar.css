@@ -79,7 +79,7 @@
 
 /* Contenuto principale */
 .app-content {
-  background: #f6efe5 !important;
+  background: #fdfaf4 !important;
   min-height: 100vh;
   padding: 0px ;
   
@@ -126,7 +126,6 @@
   box-sizing: border-box;
 }
 .mat-sidenav-content {
-  background: transparent !important;
   padding: 0 !important;
   overflow-x: visible !important;  /* <-- prima era hidden */
 }

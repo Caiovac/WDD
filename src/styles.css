@@ -8,3 +8,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 1.35rem !important;
   color: #fff !important;
 }
+
+/* blocca scroll (già suggerito) */
+html.loading-lock, body.loading-lock { overflow: hidden; }
+
+/* NASCONDI tutto il contenuto dell'app eccetto il loader */
+html.loading-lock app-nav-bar,
+html.loading-lock .content {
+  visibility: hidden !important;
+}

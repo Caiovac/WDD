@@ -51,7 +51,6 @@
   display:block;
   width: 80px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: .8;
 }
 .story-divider .dot{
@@ -115,40 +114,59 @@
 @media (max-width: 600px){
   .story-photo img{ max-height: 52vh; }
 }
-/* Sezione luogo */
-.place-hero{
-  background: var(--bg-dark);
-  color: var(--text);
-  text-align: center;
-  padding: clamp(56px, 10vh, 120px) 16px 24px;
+.story-collage{
+  margin: clamp(24px, 6vw, 64px) auto;
+  max-width: min(1400px, 82vw);
 }
-.place-container{ max-width: 960px; margin: 0 auto; }
-.place-kicker{
-  letter-spacing: .26em; text-transform: uppercase;
-  font-size: clamp(.72rem, .9vw, .85rem); color: var(--muted); margin-bottom: 10px;
+.collage-grid{
+  display: grid;
+  grid-template-columns: 1.35fr .95fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "a b" "a c";
+  gap: clamp(8px, 1.6vw, 16px);
 }
-.place-title{
-  font-family: 'Cinzel', serif; font-weight: 700;
-  font-size: clamp(2rem, 3.6vw, 2.8rem); margin: 0 0 14px;
-  color: var(--text);
+.collage-item{
+  margin:0; position:relative; overflow:hidden;
+  border-radius: var(--radius-xl, 28px);
+  box-shadow: var(--shadow, 0 10px 30px #00000014);
+  background: var(--paper, #fdfaf4);
+  transform: translateZ(0);
+  animation: collageIn .6s ease both;
 }
-.place-lead{
-  line-height: 1.9; color: var(--muted);
-  font-size: clamp(.98rem, 1.2vw, 1.08rem); max-width: 900px; margin: 0 auto;
+.collage-item img{
+  width:100%; height:100%; object-fit:cover; display:block;
 }
 
-/* Foto della chiesa */
-.place-photo{ margin:0; background:#000; overflow:hidden; }
-.place-photo img{
-  display:block; inline-size:100%; block-size: clamp(380px, 70vh, 980px);
-  object-fit: cover; object-position: 50% 45%; /* sposta il focus se serve */
+/* aree + rapporti */
+.ph-a{ grid-area:a; aspect-ratio: 3 / 4; }   /* grande, verticale */
+.ph-b{ grid-area:b; aspect-ratio: 16 / 15; } /* sopra a destra */
+.ph-c{ grid-area:c; aspect-ratio: 16 / 15; } /* sotto a destra */
+
+/* didascalia */
+.collage-caption{
+  text-align:center; color: var(--muted, #7a6f62);
+  margin-top: clamp(8px, 1.2vw, 12px);
+  font-size: clamp(.9rem, 1.4vw, 1rem);
 }
-.place-photo figcaption{
-  background: var(--bg-dark); color: var(--muted);
-  text-align:center; padding: 14px 12px 40px; font-size:.95rem;
+
+/* animazione morbida */
+@keyframes collageIn{
+  from{ opacity:0; transform: translateY(10px) scale(.985); }
+  to  { opacity:1; transform: translateY(0)    scale(1); }
 }
-@media (max-width: 960px){
-  .place-photo img{ block-size: clamp(300px, 58vh, 760px); object-position: 50% 50%; }
+
+/* hover lieve (solo desktop) */
+@media (hover:hover){
+  .collage-item:hover img{ transform:scale(1.03); transition: transform .5s ease; }
+}
+
+/* Mobile: stack verticale */
+@media (max-width: 740px){
+  .collage-grid{
+    grid-template-columns: 1fr;
+    grid-template-areas: "a" "b" "c";
+  }
+  .ph-a{ aspect-ratio: 4 / 5; } /* un po’ più alto su mobile */
 }
 /* --- Back to top flottante --- */
 .backtotop{

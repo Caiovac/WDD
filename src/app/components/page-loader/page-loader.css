@@ -1,0 +1,41 @@
+:host{ position:fixed; inset:0; z-index:5000; pointer-events:none; } /* > del tuo sidenav */
+.loader-overlay{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background: var(--paper, #fff);
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition: opacity .28s ease, visibility 0s linear .28s;
+}
+.loader-overlay.active{ opacity:1; visibility:visible; pointer-events:all; transition:opacity .28s ease; }
+
+.hearts{ position:relative; width:220px; height:160px; filter:drop-shadow(0 6px 18px rgba(0,0,0,.18)); }
+.heart{
+  --c: var(--accent-2, #af4261);
+  position:absolute; left:50%; bottom:0; width:28px; height:28px; background:var(--c);
+  transform: translateX(calc(-50% + var(--x,0))) rotate(-45deg);
+  animation: float 2200ms infinite ease-in; animation-delay: var(--d,0ms);
+  border-radius: 4px;
+}
+.heart::before, .heart::after{
+  content:""; position:absolute; width:28px; height:28px; background:inherit; border-radius:50%;
+}
+.heart::before{ top:-14px; left:0; }
+.heart::after { left:14px; top:0; }
+
+@keyframes float{
+  0%{ transform: translateX(calc(-50% + var(--x))) translateY(0) rotate(-45deg); opacity:0; }
+  10%{ opacity:1; }
+  70%{ opacity:1; }
+  100%{ transform: translateX(calc(-50% + var(--x))) translateY(-140px) rotate(-45deg); opacity:0; }
+}
+.loader-text{
+  position:absolute; bottom:20%;
+  font-family:'Cinzel', serif; letter-spacing:.5px; color:var(--accent-2, #af4261);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .heart{ animation: pulse 1200ms ease-in-out infinite; }
+  @keyframes pulse{
+    0%,100%{ transform: translateX(calc(-50% + var(--x))) scale(1) rotate(-45deg); }
+    50%{    transform: translateX(calc(-50% + var(--x))) scale(1.1) rotate(-45deg); }
+  }
+}
