@@ -9,7 +9,7 @@
 
 .hearts{ position:relative; width:220px; height:160px; filter:drop-shadow(0 6px 18px rgba(0,0,0,.18)); }
 .heart{
-  --c: var(--accent-2, #af4261);
+  --c: var(--accent-2, #dea193);
   position:absolute; left:50%; bottom:0; width:28px; height:28px; background:var(--c);
   transform: translateX(calc(-50% + var(--x,0))) rotate(-45deg);
   animation: float 2200ms infinite ease-in; animation-delay: var(--d,0ms);

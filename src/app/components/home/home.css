@@ -51,7 +51,7 @@
   border-top-right-radius: 48px;
   box-shadow: 0 -8px 32px #0002;
   padding: 64px 0 0 0;
-  min-height: 7ì80vh;
+  min-height: 50vh;
   animation: fadeInUp 1s;
 }
 .section-scroll-over > * { position: relative; z-index: 1; }
@@ -64,7 +64,7 @@
 }
 .bp-frame{
   width: min(92vw, 1600px);
-  margin: 40px auto clamp(48px, 6vh, 72px) !important;
+  margin:45px auto clamp(48px, 6vh, 72px) !important;
   overflow: visible;         /* <-- NON taglia più l’immagine */
   border-radius: 8px;
 }
@@ -101,18 +101,18 @@
 .hero-save-date {
   font-size: 2.6rem;
   margin-bottom: 2.6rem;
-  color: #af4261;
+  color: #0E294D;
 }
 
 .hero-address {
   font-size: 2.15rem;
   padding-bottom: 4.2rem;
-  color: #af4261;
+  color: #0E294D;
 }
 
 .hero-message {
   font-size: 2.2rem;
-  color: #af4261;
+  color: #0E294D;
   border-radius: 12px;
   padding: 10px auto 50px;
   display: inline-block;
@@ -120,13 +120,37 @@
   margin-bottom: 0px;
   letter-spacing: 1.2px;
 }
+.btn-rose{
+  /* palette rosa per QUESTO bottone */
+  --mat-button-filled-container-color: #dea193;
+  --mat-button-filled-label-text-color: #FFFFFF;
+
+  border-radius: 999px;
+  padding: 20px 18px;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: .2px;
+  margin-bottom: 35px;
+}
 @media (max-width: 1600px) {
   .bp-frame{ width: min(92vw, 800px); 
   
     margin: 20px auto 28px;
+    
 }
 
+.btn-rose{
+  /* palette rosa per QUESTO bottone */
+  --mat-button-filled-container-color: #dea193;
+  --mat-button-filled-label-text-color: #FFFFFF;
 
+  border-radius: 999px;
+  padding: 20px 18px;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: .2px;
+  margin-bottom: 35px;
+}
 }
 /* ===== iPhone / mobile stretto ===== */
 @media (max-width: 960px) {
@@ -135,7 +159,8 @@
     --shift-x: 0px;
   }
   
-  .bp-frame{ width: min(94vw, 720px); }
+  .bp-frame{ width: min(94vw, 720px);
+  margin-top:15px }
   .scroll-over-img{ transform: translateY(-40px); }
   /* usa 100svh per l'altezza reale della viewport mobile */
   .hero-background{
@@ -195,8 +220,8 @@
   .bp-frame{
     position: relative;
     width: min(600px, 92vw); /* larghezza mobile */
-    height: 1500px;           /* altezza voluta */
-    margin: -12px auto 24px;
+    height: 1000px;           /* altezza voluta */
+    margin: -320px auto 24px;
     overflow: hidden;
     border-radius: 8px;
   }
@@ -205,32 +230,32 @@
     left: 50%;
     top: 50%;
     width: auto;
-    height: 904px;           /* base per la scala */
+    height: 604px;           /* base per la scala */
     max-width: none;         /* evita limiti ereditati */
     transform: translate(-50%, -50%) rotate(90deg) scale(0.70);
     transform-origin: 50% 50%;
   }
 }
 .hero-actions{
-   margin-top: clamp(32px, 5vh, 64px) !important;
+  margin-top: clamp(12px, 15vh, 4px) !important;
   gap: clamp(14px, 2vw, 20px) !important;
   display:flex; flex-direction:column; align-items:center; gap:10px;
 }
 .hero-note{
   font-size:clamp(16px,2.2vw,18px); line-height:1.35;
-  color:var(--muted,#fd3d2f); text-align:center; 
-  background:rgba(255,255,255,.7); border-radius:999px;
+  color:var(--muted,#0E294D); text-align:center; 
+  border-radius:999px;
   margin-bottom: 50px !important;
 }
 
-/* ⚠️ selettore giusto per mat-flat-button */
+/* selettore giusto per mat-flat-button */
 .btn-rose.mat-mdc-unelevated-button{
   border-radius:999px !important;
   padding:10px 18px !important;
   box-shadow:0 10px 28px #00000014;
   text-transform:none;           /* no maiuscole */
   font-weight:600; letter-spacing:.2px;
-  background-color:#af4261 !important;
+  background-color:#dea193 !important;
 }
 
 /* label interna + iconcina */
@@ -239,7 +264,7 @@
 }
 .btn-rose{
   /* palette rosa per QUESTO bottone */
-  --mat-button-filled-container-color: #AF4261;
+  --mat-button-filled-container-color: #dea193;
   --mat-button-filled-label-text-color: #FFFFFF;
 
   border-radius: 999px;
@@ -247,6 +272,7 @@
   text-transform: none;
   font-weight: 600;
   letter-spacing: .2px;
+  margin-bottom: 25px;
 }
 .btn-rose .arrow{ display:inline-block; transition:transform .2s ease; }
 .btn-rose:hover .arrow{ transform:translateX(4px) translateY(2px) rotate(-18deg); }
