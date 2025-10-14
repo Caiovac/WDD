@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageLoader } from './page-loader';
+import { PageLoaderComponent } from './page-loader';
 
 describe('PageLoader', () => {
-  let component: PageLoader;
-  let fixture: ComponentFixture<PageLoader>;
+  let component: PageLoaderComponent;
+  let fixture: ComponentFixture<PageLoaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PageLoader]
+      imports: [PageLoaderComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PageLoader);
+    fixture = TestBed.createComponent(PageLoaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
