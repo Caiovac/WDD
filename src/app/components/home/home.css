@@ -117,7 +117,7 @@
   padding: 10px auto 50px;
   display: inline-block;
   margin-top: 30px;
-  margin-bottom: 0px;
+  margin-bottom: 50px;
   letter-spacing: 1.2px;
 }
 .btn-rose{
@@ -130,7 +130,7 @@
   text-transform: none;
   font-weight: 600;
   letter-spacing: .2px;
-  margin-bottom: 35px;
+  margin-bottom: 50px;
 }
 @media (max-width: 1600px) {
   .bp-frame{ width: min(92vw, 800px); 
@@ -149,7 +149,7 @@
   text-transform: none;
   font-weight: 600;
   letter-spacing: .2px;
-  margin-bottom: 35px;
+  margin-bottom: 50px;
 }
 }
 /* ===== iPhone / mobile stretto ===== */
@@ -272,9 +272,9 @@
   text-transform: none;
   font-weight: 600;
   letter-spacing: .2px;
-  margin-bottom: 25px;
+  margin-bottom: 55px;
 }
-.btn-rose .arrow{ display:inline-block; transition:transform .2s ease; }
+.btn-rose .arrow{ display:inline-block; transition:transform .2s ease;  }
 .btn-rose:hover .arrow{ transform:translateX(4px) translateY(2px) rotate(-18deg); }
 
 /* hover/focus */
