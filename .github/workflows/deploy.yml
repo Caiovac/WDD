@@ -1,0 +1,55 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]     # cambia se usi un altro branch
+  workflow_dispatch:          # permette esecuzione manuale dal tab Actions
+
+permissions:
+  contents: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # install: tenta npm ci, se i peer-deps danno rogne usa legacy-peer-deps
+      - name: Install dependencies
+        run: |
+          npm ci || npm i --legacy-peer-deps
+
+      # Build per dominio custom alla radice /
+      - name: Build Angular
+        run: |
+          npx -y -p @angular/cli@20.1.2 ng build --configuration production --base-href /
+
+      # Trova la cartella corretta (con o senza /browser), crea 404 e CNAME
+      - name: Prepare publish dir
+        env:
+          CUSTOM_DOMAIN: www.caioetatiana.com
+        run: |
+          APP_DIR=$(ls -1 dist | head -n 1)
+          PDIR="dist/$APP_DIR"
+          if [ -d "$PDIR/browser" ]; then PDIR="$PDIR/browser"; fi
+          echo "PDIR=$PDIR" >> $GITHUB_ENV
+          cp "$PDIR/index.html" "$PDIR/404.html"
+          echo "$CUSTOM_DOMAIN" > "$PDIR/CNAME"
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ env.PDIR }}
+          commit_message: "deploy: ${{ github.sha }}"
