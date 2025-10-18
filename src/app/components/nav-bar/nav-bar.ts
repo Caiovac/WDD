@@ -41,8 +41,8 @@ export class NavBar implements OnInit {
     { label: 'Home',      link: '/prm/home' },
     { label: 'Storia', link: '/prm/our-story' },
     { label: 'Regali',    link: '/prm/regali' },
-    { label: 'Itinerario', link: '/prm/itinerario' },
-    { label: 'Galleria',    link: '/prm/gallery' },
+    // { label: 'Itinerario', link: '/prm/itinerario' },
+    // { label: 'Galleria',    link: '/prm/gallery' },
   ];
 
   private static readonly MOBILE_QUERY = '(max-width: 959.98px)';
