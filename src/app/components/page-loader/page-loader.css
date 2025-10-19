@@ -39,3 +39,62 @@
     50%{    transform: translateX(calc(-50% + var(--x))) scale(1.1) rotate(-45deg); }
   }
 }
+/* Più spazio orizzontale per i cuori */
+.hearts{
+  position:relative; width:320px; height:160px;
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.18));
+}
+
+/* Salto rapido e ritorno, con leggero rimbalzo */
+.heart{
+  --c: var(--accent-2, #dea193);
+  --t: 1600ms;            /* durata del ciclo del salto */
+  --h: 60px;              /* altezza del salto */
+  position:absolute; left:50%; bottom:0;
+  width:28px; height:28px; background:var(--c);
+  transform: translateX(calc(-50% + var(--x,0))) rotate(-45deg);
+  transform-origin: 50% 100%;
+  animation: jump var(--t) infinite;
+  animation-delay: var(--d,0ms);
+  border-radius: 4px;
+  will-change: transform;
+}
+.heart::before, .heart::after{
+  content:""; position:absolute; width:28px; height:28px; background:inherit; border-radius:50%;
+}
+.heart::before{ top:-14px; left:0; }
+.heart::after { left:14px; top:0; }
+
+/* Keyframes: su → giù → piccolo rimbalzo → base */
+@keyframes jump{
+  0%{
+    transform: translateX(calc(-50% + var(--x))) translateY(0) rotate(-45deg) scaleY(1);
+  }
+  30%{
+    transform: translateX(calc(-50% + var(--x))) translateY(calc(var(--h) * -1)) rotate(-45deg) scaleY(1.02);
+    /* salita veloce (ease-out) */
+    animation-timing-function: cubic-bezier(.2,.8,.2,1);
+  }
+  55%{
+    transform: translateX(calc(-50% + var(--x))) translateY(0) rotate(-45deg) scaleY(.92);
+    /* atterraggio (ease-in) */
+    animation-timing-function: cubic-bezier(.4,0,.6,1);
+  }
+  70%{
+    transform: translateX(calc(-50% + var(--x))) translateY(-14px) rotate(-45deg) scaleY(1);
+  }
+  100%{
+    transform: translateX(calc(-50% + var(--x))) translateY(0) rotate(-45deg) scaleY(1);
+  }
+}
+
+/* Rispetto accessibilità: meno movimento */
+@media (prefers-reduced-motion: reduce){
+  .heart{
+    animation: pulse 900ms ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ transform: translateX(calc(-50% + var(--x))) rotate(-45deg) scale(1); }
+    50%{    transform: translateX(calc(-50% + var(--x))) rotate(-45deg) scale(1.06); }
+  }
+}
