@@ -5,6 +5,7 @@ import { Regali }     from './components/regali/regali';
 import { Itinerario } from './components/itinerario/itinerario';
 import { Menu }       from './components/menu/menu';
 import { Gallery }    from './components/gallery/gallery';
+import { Streaming }  from './components/streaming/streaming-section';
 
 export const routes: Routes = [
   // STANDARD (solo 3)
@@ -19,6 +20,8 @@ export const routes: Routes = [
   { path: 'prm/itinerario', component: Itinerario },
   { path: 'prm/menu',       component: Menu },
   { path: 'prm/gallery',    component: Gallery },
+  { path: 'prm/streaming',  component: Streaming },     
+  { path: 'prm/streaming/:id', component: Streaming },    
 
   // default / fallback
   { path: '',    redirectTo: 'std/home', pathMatch: 'full' },
