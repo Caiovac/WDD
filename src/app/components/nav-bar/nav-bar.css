@@ -138,3 +138,110 @@
 
 /* Backdrop (mobile) trasparente */
 .mat-drawer-backdrop { background: transparent !important; }
+
+
+/* il contenitore del contenuto diventa ancoraggio */
+.app-content { position: relative; }
+
+/* posiziona il selettore lingua SOLO in alto a destra,
+   non a tutta larghezza, e non mangiare i click fuori dal bottone */
+.lang-switch{
+  position: absolute;   /* prima era sticky */
+  top: 12px;
+  right: 12px;
+  z-index: 400;
+  pointer-events: none; /* il container non intercetta i click */
+}
+.lang-switch > *{
+  pointer-events: auto; /* il bottone resta cliccabile */
+}
+
+/* assicura che l’hamburger stia sopra */
+.floating-hamburger{
+  position: absolute;   /* se non lo è già nel tuo CSS */
+  top: 12px;
+  left: 12px;
+  z-index: 500;         /* maggiore di .lang-switch */
+}
+
+/* contenitore già posizionato assoluto */
+.lang-switch { pointer-events: none; }
+.lang-switch > * { pointer-events: auto; }
+
+/* pill “glass” */
+.lang-btn {
+  --ring: rgba(20, 41, 63, .14);
+  --bg: rgba(255, 255, 255, .75);
+  --bg-hover: rgba(255, 255, 255, .92);
+
+  border-radius: 9999px !important;
+  border-color: var(--ring) !important;
+  background: var(--bg) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 6px 12px !important;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,.03),
+    0 6px 18px rgba(0,0,0,.06);
+  transition: background .2s ease, transform .08s ease;
+}
+
+.lang-btn:hover { background: var(--bg-hover) !important; }
+.lang-btn:active { transform: translateY(1px); }
+
+.lang-btn .mdc-button__label{
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  gap: 6px;
+  width: 100%;
+}
+
+
+.lang-btn .flag{ font-size: 18px; line-height: 1; }
+.lang-btn .chev{ font-size: 18px; opacity: .7; margin: 0; }
+.lang-btn .code { letter-spacing: .06em; font-weight: 700; }
+.lang-btn .mat-icon{ margin: 0 !important; }
+
+/* menu panel: arrotondato + soft border + blur */
+.lang-menu-panel .mat-mdc-menu-panel {
+  border-radius: 14px !important;
+  border: 1px solid rgba(20, 41, 63, .12);
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    0 8px 30px rgba(0,0,0,.08),
+    0 2px 10px rgba(0,0,0,.06);
+}
+
+/* voci di menu */
+.lang-menu-panel .mat-mdc-menu-content { padding: 6px !important; }
+.lang-menu-panel .mat-mdc-menu-item {
+  border-radius: 10px;
+  gap: 10px;
+  font-weight: 500;
+}
+.lang-menu-panel .mat-mdc-menu-item .flag { font-size: 18px; }
+.lang-menu-panel .mat-mdc-menu-item.active {
+  background: rgba(13, 110, 253, .08); /* azzurrino */
+  font-weight: 700;
+}
+
+/* dark mode (se usi preferenze) */
+@media (prefers-color-scheme: dark) {
+  .lang-btn {
+    --ring: rgba(255,255,255,.16);
+    --bg: rgba(22, 24, 28, .6);
+    --bg-hover: rgba(22, 24, 28, .78);
+    color: #e6e6e6;
+  }
+  .lang-menu-panel .mat-mdc-menu-panel {
+    background: rgba(22,24,28,.9);
+    border-color: rgba(255,255,255,.12);
+  }
+}

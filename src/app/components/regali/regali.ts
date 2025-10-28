@@ -1,34 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '../../shared/i18n/translate.pipe';
+import { I18nService } from '../../shared/i18n/i18n.service';
+import { Subscription } from 'rxjs';
 
-type Idea = { id: string; name: string; img: string };
+type Idea = { id: 'viaggio' | 'cena' | 'casa'; img: string };
 
 @Component({
   selector: 'app-regali',
   standalone: true,
   templateUrl: './regali.html',
   styleUrls: ['./regali.css'],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
 })
-export class Regali {
+export class Regali implements OnDestroy {
   // === DATI VOSTRI ===
-  beneficiary = ' Monica Tatiana Mantilla Doce';
+  beneficiary = 'Monica Tatiana Mantilla Doce';
   bankName    = 'Banca Popolare di Sondrio';
   ibanRaw     = 'IT02J0569611009CCI000114942'; // <-- SOSTITUISCI
-  defaultCause = 'Regalo matrimonio — Caio & Tatiana';
-  qrSrc       = '/qr-iban-fake.png'; // opzionale
+  qrSrc       = '/assets/qr-iban-fake.png'; // opzionale
   amounts     = [30, 50, 100, 200];
 
-  // === IDEE (mini immagine + nome) ===
+  // === IDEE === (solo id: il testo viene dal JSON)
   ideas: Idea[] = [
-    { id: 'viaggio',  name: 'Viaggio Nozze', img: 'viaggio.jpg' },
-    { id: 'cena',     name: 'Cena speciale',      img: 'cena.jpg' },
-    { id: 'casa',      name: 'Casa',        img: 'casa.jpg' },
+    { id: 'viaggio', img: '/assets/viaggio.jpg' },
+    { id: 'cena',    img: '/assets/cena.jpg' },
+    { id: 'casa',    img: '/assets/casa.jpg' },
   ];
 
   // === Stato selezioni ===
-  selectedIdeaId: string | null = null;
+  selectedIdeaId: Idea['id'] | null = null;
   customIdeaEnabled = false;
   customIdea = '';
 
@@ -37,10 +39,26 @@ export class Regali {
   customAmount: number | null = null;
 
   // === UI ===
-  cause = this.defaultCause;
+  cause = '';                 // verrà impostata in constructor
   showQr = false;
   toastVisible = false;
-  toastMessage = 'Copiato!';
+  toastMessage = '';
+
+  private sub?: Subscription;
+
+  constructor(private i18n: I18nService) {
+    // init messaggi e causale in base alla lingua
+    this.toastMessage = this.i18n.t('gifts.toast.copied');
+    this.updateCause();
+
+    // quando cambia lingua, aggiorna testi runtime (causale, toast, etc.)
+    this.sub = this.i18n.lang$.subscribe(() => {
+      this.toastMessage = this.i18n.t('gifts.toast.copied');
+      this.updateCause();
+    });
+  }
+
+  ngOnDestroy() { this.sub?.unsubscribe(); }
 
   // IBAN formattato 4-4-4…
   get formattedIban(): string {
@@ -75,11 +93,11 @@ export class Regali {
   }
 
   updateCause(){
+    const base = this.i18n.t('gifts.defaultCause');
+
     const ideaText = this.customIdeaEnabled
       ? (this.customIdea ?? '').trim()
-      : (this.selectedIdeaId
-          ? (this.ideas.find(i => i.id === this.selectedIdeaId)?.name ?? '')
-          : '');
+      : (this.selectedIdeaId ? this.i18n.t('gifts.ideas.' + this.selectedIdeaId) : '');
 
     const amountVal = this.customAmountEnabled
       ? (this.customAmount ?? 0)
@@ -88,22 +106,22 @@ export class Regali {
     const ideaPart   = ideaText ? ` — ${ideaText}` : '';
     const amountPart = amountVal > 0 ? ` — €${Math.round(amountVal)}` : '';
 
-    this.cause = `${this.defaultCause}${ideaPart}${amountPart}`;
+    this.cause = `${base}${ideaPart}${amountPart}`;
   }
 
   // ====== Azioni utili ======
   copy(text: string){
-    navigator.clipboard.writeText(text).then(() => this.showToast('Copiato negli appunti'));
+    navigator.clipboard.writeText(text).then(() => this.showToast(this.i18n.t('gifts.toast.copied')));
   }
 
   copyFull(){
-    const all = [
-      `Intestatario: ${this.beneficiary}`,
-      `IBAN: ${this.formattedIban}`,
-      `Banca: ${this.bankName}`,
-      `Causale: ${this.cause}`,
-    ].join('\n');
-    this.copy(all);
+    const lines = [
+      `${this.i18n.t('gifts.fields.beneficiary')}: ${this.beneficiary}`,
+      `${this.i18n.t('gifts.fields.iban')}: ${this.formattedIban}`,
+      `${this.i18n.t('gifts.fields.bank')}: ${this.bankName}`,
+      `${this.i18n.t('gifts.fields.cause')}: ${this.cause}`
+    ];
+    this.copy(lines.join('\n'));
   }
 
   toggleQr(){ this.showQr = !this.showQr; }

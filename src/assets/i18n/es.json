@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "ourStory": "Nuestra historia",
+    "gifts": "Regalos",
+    "itinerary": "Itinerario",
+    "menu": "Menú",
+    "gallery": "Galería"
+  },
+  "lang": {
+    "IT": "Italiano",
+    "PT": "Portugués",
+    "ES": "Español",
+    "EN": "Inglés"
+  },
+  "home": {
+    "hero": {
+      "message": "Haz este viaje con nosotros",
+      "saveDate": "Reserva la fecha: {{date}}",
+      "address": "Dirección: {{place}}",
+      "note": "¡Estamos emocionados contando los días! ✨",
+      "cta": "Nuestra historia",
+      "ctaAria": "Ir a nuestra historia",
+      "altNames": "Caio & Tatiana",
+      "altBoarding": "Save the Date"
+    }
+  },
+    
+  "ourStory": {
+    "hero": {
+      "kicker": "QUÉ HERMOSO ES RECORDAR",
+      "title": "Nuestra historia",
+      "lead": "Cuando nos conocimos no imaginábamos que un día viviríamos nuestro gran sueño: el matrimonio. El día se acerca, el corazón late fuerte y vuelven los recuerdos de todo lo que vivimos y construimos. Es hermoso recordar cada pequeño pedazo de nuestra historia de amor."
+    },
+    "place": {
+      "kicker": "NUESTRO LUGAR",
+      "title": "El lugar donde todo comenzó",
+      "lead": "Entre luces y canciones nos conocimos. En medio de oraciones, abrazos del domingo y sonrisas después del culto, nació algo sencillo y fuerte. Aquí aprendimos a servir, a creer juntos, a decir “estoy aquí” el uno para el otro. Cada vez que entramos a la iglesia, encontramos aquella primera mirada y entendemos que hogar no es solo un lugar: es la presencia de Dios y las personas a nuestro lado."
+    },
+    "collage": {
+      "caption": "Nuestros momentos: música, amistad, oración.",
+      "altA": "En el escenario durante la alabanza",
+      "altB": "Amigos conversando después del culto",
+      "altC": "Momento de oración juntos",
+      "altHero": "Nosotros dos"
+    },
+    "backTop": {
+      "aria": "Volver arriba",
+      "label": "Volver arriba"
+        }
+    },
+    "gifts": {
+    "hero": {
+      "eyebrow": "CON SU CARIÑO",
+      "title": "LOS REGALOS",
+      "lead": "El mayor regalo son ustedes. 🤍",
+      "altHero": "Caio & Tatiana"
+    },
+    "card": { "ibanTitle": "Transferencia IBAN" },
+    "fields": {
+      "beneficiary": "Titular",
+      "iban": "IBAN",
+      "bank": "Banco",
+      "cause": "Concepto"
+    },
+    "idea": {
+      "title": "Idea de regalo",
+      "other": "Otro…",
+      "placeholder": "Escribe aquí tu idea de regalo…"
+    },
+    "ideas": {
+      "viaggio": "Viaje de luna de miel",
+      "cena": "Cena especial",
+      "casa": "Hogar"
+    },
+    "amount": {
+      "label": "Importe:",
+      "other": "Otro importe…",
+      "customNote": "El importe personalizado se añadirá al concepto."
+    },
+    "actions": { "copyAll": "Copiar todos los datos" },
+    "qr": {
+      "alt": "QR con datos de transferencia",
+      "note": "Incluye IBAN, titular y concepto."
+    },
+    "toast": { "copied": "Copiado al portapapeles" },
+    "aria": { "copyIban": "Copiar IBAN", "copyCause": "Copiar concepto" },
+    "defaultCause": "Regalo de boda — Caio & Tatiana"
+  }
+}

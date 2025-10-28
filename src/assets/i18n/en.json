@@ -1,0 +1,92 @@
+{
+  "nav": {
+    "home": "Home",
+    "ourStory": "Our Story",
+    "gifts": "Gifts",
+    "itinerary": "Itinerary",
+    "menu": "Menu",
+    "gallery": "Gallery"
+  },
+  "lang": {
+    "IT": "Italian",
+    "PT": "Portuguese",
+    "ES": "Spanish",
+    "EN": "English"
+  },
+  "home": {
+    "hero": {
+      "message": "Travel this journey with us",
+      "saveDate": "Save the date: {{date}}",
+      "address": "Address: {{place}}",
+      "note": "We’re thrilled and counting the days ✨",
+      "cta": "Our Story",
+      "ctaAria": "Go to our story",
+      "altNames": "Caio & Tatiana",
+      "altBoarding": "Save the Date"
+    }
+  },
+  
+  "ourStory": {
+    "hero": {
+      "kicker": "HOW BEAUTIFUL TO REMEMBER",
+      "title": "Our Story",
+      "lead": "When we first met, we never imagined that one day we would live our greatest dream: marriage. The day is getting closer, our hearts beat fast and memories flow of all we have lived and built. It’s beautiful to recall every small piece of our love story."
+    },
+    "place": {
+      "kicker": "OUR PLACE",
+      "title": "The place where it all began",
+      "lead": "Amid lights and songs we met. Among prayers, Sunday hugs and the smiles after church, something simple and strong was born. Here we learned to serve, to believe together, to say “I’m here” for each other. Every time we enter church, we find that first glance again and know that home isn’t just a place: it’s God’s presence and the people beside us."
+    },
+    "collage": {
+      "caption": "Our moments: music, friendship, prayer.",
+      "altA": "On stage during worship",
+      "altB": "Friends chatting after service",
+      "altC": "A moment of prayer together",
+      "altHero": "The two of us"
+    },
+    "backTop": {
+      "aria": "Back to top",
+      "label": "Back to top"
+    }
+  },
+
+    "gifts": {
+    "hero": {
+      "eyebrow": "WITH YOUR LOVE",
+      "title": "GIFTS",
+      "lead": "The greatest gift is your presence. 🤍",
+      "altHero": "Caio & Tatiana"
+    },
+    "card": { "ibanTitle": "Bank Transfer (IBAN)" },
+    "fields": {
+      "beneficiary": "Beneficiary",
+      "iban": "IBAN",
+      "bank": "Bank",
+      "cause": "Reason"
+    },
+    "idea": {
+      "title": "Gift idea",
+      "other": "Other…",
+      "placeholder": "Type your gift idea…"
+    },
+    "ideas": {
+      "viaggio": "Honeymoon",
+      "cena": "Special dinner",
+      "casa": "Home"
+    },
+    "amount": {
+      "label": "Amount:",
+      "other": "Other amount…",
+      "customNote": "The custom amount will be added to the reason."
+    },
+    "actions": { "copyAll": "Copy all data" },
+    "qr": {
+      "alt": "QR with transfer data",
+      "note": "Contains IBAN, beneficiary and reason."
+    },
+    "toast": { "copied": "Copied to clipboard" },
+    "aria": { "copyIban": "Copy IBAN", "copyCause": "Copy reason" },
+    "defaultCause": "Wedding gift — Caio & Tatiana"
+  }
+
+}

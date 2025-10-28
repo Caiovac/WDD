@@ -10,17 +10,26 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu'; // 👈 NEW
 import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
 
+// i18n zero-lib
+import { I18nService } from '../../shared/i18n/i18n.service';
+import { TranslatePipe } from '../../shared/i18n/translate.pipe';
+
 interface MenuItem {
-  label: string;
+  label: string; // ora è una CHIAVE (es. 'nav.home')
   link: string;
 }
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [ CommonModule, RouterModule, MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule, MatButtonModule, LayoutModule ],
+  imports: [
+    CommonModule, RouterModule,
+    MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule, MatButtonModule, MatMenuModule, LayoutModule,
+    TranslatePipe // 👈 per usare | t nel template
+  ],
   templateUrl: './nav-bar.html',
   styleUrls: ['./nav-bar.css']
 })
@@ -31,26 +40,33 @@ export class NavBar implements OnInit, AfterViewInit {
   isHandset = false;
   opened = true;
 
+  // 👇 lingua corrente (per il bottone)
+  currentLang: 'it'|'en'|'es'|'pt' = 'it';
+
+  // Usa le CHIAVI di traduzione del tuo JSON ("nav.*")
   private stdItems: MenuItem[] = [
-    { label: 'Home',   link: '/std/home' },
-    { label: 'Storia', link: '/std/our-story' },
-    { label: 'Regali', link: '/std/regali' },
+    { label: 'nav.home',     link: '/std/home' },
+    { label: 'nav.ourStory', link: '/std/our-story' },
+    { label: 'nav.gifts',    link: '/std/regali' },
   ];
 
- private prmItems: MenuItem[] = [
-    { label: 'Home',      link: '/prm/home' },
-    { label: 'Storia', link: '/prm/our-story' },
-    { label: 'Regali',    link: '/prm/regali' },
-    // { label: 'Itinerario', link: '/prm/itinerario' },
-    // { label: 'Galleria',    link: '/prm/gallery' },
+  private prmItems: MenuItem[] = [
+    { label: 'nav.home',     link: '/prm/home' },
+    { label: 'nav.ourStory', link: '/prm/our-story' },
+    { label: 'nav.gifts',    link: '/prm/regali' },
+    // { label: 'nav.itinerary', link: '/prm/itinerario' },
+    // { label: 'nav.gallery',   link: '/prm/gallery' },
   ];
 
   private static readonly MOBILE_QUERY = '(max-width: 959.98px)';
 
   constructor(
     private router: Router,
-    private breakpointObserver: BreakpointObserver
-  ) {}
+    private breakpointObserver: BreakpointObserver,
+    private i18n: I18nService // 👈
+  ) {
+    this.currentLang = this.i18n.lang;
+  }
 
   ngOnInit() {
     const m = window.matchMedia(NavBar.MOBILE_QUERY).matches;
@@ -75,14 +91,29 @@ export class NavBar implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // ogni volta che cambia rotta, riportiamo il vero scroller in alto
     this.router.events
       .pipe(filter(e => e instanceof NavigationEnd))
       .subscribe(() => {
         const el = this.content.getElementRef().nativeElement as HTMLElement;
         el.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-        // opzionale: anche il body, nel caso qualche pagina usi window come scroller
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       });
   }
+
+  // 👇 cambia lingua dal menu
+  async setLang(lang: 'it'|'en'|'es'|'pt') {
+    await this.i18n.use(lang);
+    this.currentLang = lang;
+  }
+  flagFor(l: string): string {
+    switch (l) {
+      case 'it': return '🇮🇹';
+      case 'pt': return '🇵🇹';
+      case 'es': return '🇪🇸';
+      case 'en': return '🇬🇧';
+      default:   return '🏳️';
+    }
+  }
+
+  
 }
