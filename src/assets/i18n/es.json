@@ -86,5 +86,9 @@
     "toast": { "copied": "Copiado al portapapeles" },
     "aria": { "copyIban": "Copiar IBAN", "copyCause": "Copiar concepto" },
     "defaultCause": "Regalo de boda — Caio & Tatiana"
+  },
+  "loader": {
+    "text": "Cargando…",
+    "ariaLabel": "Cargando la página"
   }
 }

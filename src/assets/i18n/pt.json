@@ -85,5 +85,9 @@
     "toast": { "copied": "Copiado para a área de transferência" },
     "aria": { "copyIban": "Copiar IBAN", "copyCause": "Copiar descrição" },
     "defaultCause": "Presente de casamento — Caio & Tatiana"
+  },
+  "loader": {
+    "text": "Carregando…",
+    "ariaLabel": "Carregando a página"
   }
 }

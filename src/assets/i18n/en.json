@@ -50,7 +50,7 @@
     }
   },
 
-    "gifts": {
+  "gifts": {
     "hero": {
       "eyebrow": "WITH YOUR LOVE",
       "title": "GIFTS",
@@ -87,6 +87,10 @@
     "toast": { "copied": "Copied to clipboard" },
     "aria": { "copyIban": "Copy IBAN", "copyCause": "Copy reason" },
     "defaultCause": "Wedding gift — Caio & Tatiana"
+  },
+  "loader": {
+    "text": "Loading…",
+    "ariaLabel": "Page loading"
   }
 
 }
