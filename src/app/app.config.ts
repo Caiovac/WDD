@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(async () => {
       const i18n = inject(I18nService);
       const saved = (localStorage.getItem('lang') as Lang | null);
-      const lang: Lang = (saved && (['it','en','es','pt'] as Lang[]).includes(saved)) ? saved : 'en';
+      const lang: Lang = (saved && (['it','en','es','pt'] as Lang[]).includes(saved)) ? saved : 'it';
       console.info('[i18n:init]', { saved, chosen: lang });
       await i18n.use(lang);
     }),
