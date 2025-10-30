@@ -21,30 +21,45 @@ export class I18nService {
   get lang(): Lang { return this.langSubject.value; }
 
   async use(lang: Lang): Promise<void> {
-    // carica dalla cache se già presente
+    // --- request id robusto (niente ?? con ++) ---
+    const ctx = this as any;
+    ctx.__reqId = (ctx.__reqId ?? 0) + 1;
+    const id: number = ctx.__reqId;
+
+    const url = `/assets/i18n/${lang}.json`;
+
+    // Persisto SUBITO la scelta (così al refresh resti nella lingua selezionata)
+    this.langSubject.next(lang);
+    localStorage.setItem('lang', lang);
+    document.documentElement.lang = lang;
+
+    // Se ho già la cache, servi subito e opzionalmente precarica IT come fallback
     if (this.cache[lang]) {
       this.dictSubject.next(this.cache[lang]);
-      this.langSubject.next(lang);
-      document.documentElement.lang = lang;
+      if (lang !== 'it' && !this.cache['it']) { void this.preload('it'); }
       return;
     }
 
-    const url = `/assets/i18n/${lang}.json`; // assoluto dalla root
     try {
-      const dict = await firstValueFrom(this.http.get<Record<string, any>>(url));
+      const dict = await firstValueFrom(
+        this.http.get<Record<string, any>>(url, { withCredentials: false })
+      );
+
+      // Risposta fuori ordine? Ignora.
+      if (id !== ctx.__reqId) return;
+
       this.cache[lang] = dict ?? {};
       this.dictSubject.next(this.cache[lang]);
-      this.langSubject.next(lang);
-      localStorage.setItem('lang', lang);
-      document.documentElement.lang = lang;
-      console.info(`[i18n] loaded ${lang}: ${Object.keys(this.cache[lang]).length} top-level keys`);
-      // Precarica IT come fallback (una volta sola)
       if (lang !== 'it' && !this.cache['it']) { void this.preload('it'); }
+
+      console.info('[i18n] loaded', lang, 'keys:', Object.keys(this.cache[lang]).length);
     } catch (err) {
+      if (id !== ctx.__reqId) return;
+
       console.warn('[i18n] failed to load', url, err);
-      this.cache[lang] = {};
-      this.dictSubject.next(this.cache[lang]);
-      this.langSubject.next(lang);
+      // Mantengo la lingua scelta, ma dettato vuoto per evitare override a ritroso
+      this.dictSubject.next({});
+      if (lang !== 'it' && !this.cache['it']) { void this.preload('it'); }
     }
   }
 

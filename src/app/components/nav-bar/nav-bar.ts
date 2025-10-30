@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
 
 // Material
 import { MatSidenavModule, MatSidenavContent } from '@angular/material/sidenav';
@@ -10,15 +11,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu'; // 👈 NEW
-import { BreakpointObserver, LayoutModule } from '@angular/cdk/layout';
+import { MatMenuModule } from '@angular/material/menu';
 
 // i18n zero-lib
-import { I18nService } from '../../shared/i18n/i18n.service';
+import { I18nService, Lang } from '../../shared/i18n/i18n.service';
 import { TranslatePipe } from '../../shared/i18n/translate.pipe';
 
 interface MenuItem {
-  label: string; // ora è una CHIAVE (es. 'nav.home')
+  label: string;
   link: string;
 }
 
@@ -28,22 +28,22 @@ interface MenuItem {
   imports: [
     CommonModule, RouterModule,
     MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule, MatButtonModule, MatMenuModule, LayoutModule,
-    TranslatePipe // 👈 per usare | t nel template
+    TranslatePipe
   ],
   templateUrl: './nav-bar.html',
   styleUrls: ['./nav-bar.css']
 })
-export class NavBar implements OnInit, AfterViewInit {
+export class NavBar implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('content', { static: true }) content!: MatSidenavContent;
 
   menuItems: MenuItem[] = [];
   isHandset = false;
   opened = true;
 
-  // 👇 lingua corrente (per il bottone)
-  currentLang: 'it'|'en'|'es'|'pt' = 'it';
+  currentLang: Lang = 'it';       // viene aggiornato dalla subscribe
+  private i18nSub?: Subscription;  // (teniamo anche una sub diretta)
+  private destroy$ = new Subject<void>();
 
-  // Usa le CHIAVI di traduzione del tuo JSON ("nav.*")
   private stdItems: MenuItem[] = [
     { label: 'nav.home',     link: '/std/home' },
     { label: 'nav.ourStory', link: '/std/our-story' },
@@ -63,27 +63,37 @@ export class NavBar implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private breakpointObserver: BreakpointObserver,
-    private i18n: I18nService // 👈
-  ) {
-    this.currentLang = this.i18n.lang;
-  }
+    private i18n: I18nService
+  ) {}
 
   ngOnInit() {
+    // segui la lingua scelta dall'AppInitializer / utente (NO use() qui)
+    this.i18nSub = this.i18n.lang$.subscribe(l => (this.currentLang = l));
+
+    // responsive sidenav
     const m = window.matchMedia(NavBar.MOBILE_QUERY).matches;
     this.isHandset = m;
     this.opened = !m;
 
-    this.breakpointObserver.observe([NavBar.MOBILE_QUERY]).subscribe(s => {
-      this.isHandset = s.matches;
-      this.opened = !this.isHandset;
-    });
+    this.breakpointObserver
+      .observe([NavBar.MOBILE_QUERY])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(s => {
+        this.isHandset = s.matches;
+        this.opened = !this.isHandset;
+      });
 
+    // aggiorna voci menu in base al prefisso rotta (/prm | /std)
     const updateMenu = (url: string) => {
       this.menuItems = url.startsWith('/prm') ? this.prmItems : this.stdItems;
     };
     updateMenu(this.router.url);
+
     this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
+      .pipe(
+        filter(e => e instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
       .subscribe((e: NavigationEnd) => {
         const activeUrl = e.urlAfterRedirects || e.url;
         updateMenu(activeUrl);
@@ -91,8 +101,12 @@ export class NavBar implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // scroll to top ad ogni navigazione
     this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
+      .pipe(
+        filter(e => e instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
       .subscribe(() => {
         const el = this.content.getElementRef().nativeElement as HTMLElement;
         el.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -100,10 +114,17 @@ export class NavBar implements OnInit, AfterViewInit {
       });
   }
 
-  // 👇 cambia lingua dal menu
-  async setLang(lang: 'it'|'en'|'es'|'pt') {
-    await this.i18n.use(lang);
-    this.currentLang = lang;
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.i18nSub?.unsubscribe();
+  }
+
+  // cambio lingua solo su click
+  async setLang(lang: Lang) {
+    if (lang !== this.currentLang) {
+      await this.i18n.use(lang);
+    }
   }
   flagFor(l: string): string {
     switch (l) {
@@ -114,6 +135,4 @@ export class NavBar implements OnInit, AfterViewInit {
       default:   return '🏳️';
     }
   }
-
-  
 }
