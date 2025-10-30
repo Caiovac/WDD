@@ -40,7 +40,14 @@
   filter: drop-shadow(0 2px 16px #0006);
   background-attachment: fixed;
 }
+@media (max-height: 700px) {
+  .hero-names-img { margin-top: 100px; }
+}
 
+/* Schermi molto bassi (laptop con devtools aperti, ecc.) */
+@media (max-height: 550px) {
+  .hero-names-img { margin-top: -10px; }
+}
 /* ===== Sezione evento che sale sopra ===== */
 .section-scroll-over {
   position: relative;
@@ -288,4 +295,23 @@
   .btn-rose, .btn-rose .arrow{ transition:none; }
 }
 
+@media (max-width: 470px){
+.bp-frame{
+    position: relative;
+    width: min(350px, 200vw); /* larghezza mobile */
+    height: 800px;          /* altezza voluta */
+    margin: -220px auto 24px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  .scroll-over-img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 450px;           /* base per la scala */
+    max-width: none;         /* evita limiti ereditati */
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.70);
+    transform-origin: 50% 50%;
+  }
+}
 }
