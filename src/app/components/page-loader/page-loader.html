@@ -1,12 +1,23 @@
-<div class="loader-overlay" [class.active]="active" role="status" aria-live="polite" [attr.aria-busy]="active">
+<div
+  class="loader-overlay"
+  [class.active]="active"
+  role="status"
+  aria-live="polite"
+  [attr.aria-busy]="active"
+  [attr.aria-label]="'loader.ariaLabel' | t"
+>
   <div class="hearts">
-  <span class="heart" style="--x:-120px; --d:0ms;"></span>
-  <span class="heart" style="--x:-80px;  --d:120ms;"></span>
-  <span class="heart" style="--x:-40px;  --d:240ms;"></span>
-  <span class="heart" style="--x:  0px;  --d:360ms;"></span>
-  <span class="heart" style="--x: 40px;  --d:480ms;"></span>
-  <span class="heart" style="--x: 80px;  --d:600ms;"></span>
-  <span class="heart" style="--x:120px;  --d:720ms;"></span>
-</div>
-  <div class="loader-text">Caricamento…</div>
+    <span class="heart" style="--x:-120px; --d:0ms;"></span>
+    <span class="heart" style="--x:-80px;  --d:120ms;"></span>
+    <span class="heart" style="--x:-40px;  --d:240ms;"></span>
+    <span class="heart" style="--x:  0px;  --d:360ms;"></span>
+    <span class="heart" style="--x: 40px;  --d:480ms;"></span>
+    <span class="heart" style="--x: 80px;  --d:600ms;"></span>
+    <span class="heart" style="--x:120px;  --d:720ms;"></span>
+  </div>
+
+  <div class="loader-text">
+    {{ (messageKey || 'loader.text') | t: messageParams }}
+  </div>
+
 </div>

@@ -1,36 +1,37 @@
 <div class="hero-background full-bleed">
   <div class="hero-bg-parallax"></div>
   <div class="hero-overlay">
-    <img src="/ctnames2.png" class="hero-names-img" alt="Caio & Tatiana">
+    <img src="/assets/ctnames2.png"
+         class="hero-names-img"
+         [alt]="'home.hero.altNames' | t">
   </div>
 </div>
 
 <div class="section-scroll-over" id="scrollOver">
   <div class="hero-info">
-    <div class="hero-message">Fai questo viaggio con noi</div>
-   <div class="bp-frame">
-      <img class="scroll-over-img" src="/boarding.png" alt="Save the Date">
+    <div class="hero-message">{{ 'home.hero.message' | t }}</div>
+
+    <div class="bp-frame">
+      <img class="scroll-over-img"
+           src="/assets/boarding.png"
+           [alt]="'home.hero.altBoarding' | t">
     </div>
-<div class="hero-actions">
-  <p class="hero-note">Siamo emozionatissimi e stiamo contando i giorni ✨</p>
 
-<button
-  mat-flat-button
-  class="btn-rose"
-  [routerLink]="['/', basePrefix, 'our-story']"
-  aria-label="Vai alla nostra storia"
-  [style.--mat-button-filled-container-color]="'#dea193'"
-  [style.--mat-button-filled-label-text-color]="'#FFFFFF'"
-  [style.--mat-button-filled-container-height]="'60px'"
-  [style.--mat-button-filled-container-width]="'200px'">
-  La nostra storia <span class="arrow" aria-hidden="true"></span>
-</button>
+    <div class="hero-actions">
+      <p class="hero-note">{{ 'home.hero.note' | t }}</p>
 
-
-</div>
-
-
-
+      <button
+        mat-flat-button
+        class="btn-rose"
+        [routerLink]="['/', basePrefix, 'our-story']"
+        [attr.aria-label]="'home.hero.ctaAria' | t"
+        [style.--mat-button-filled-container-color]="'#dea193'"
+        [style.--mat-button-filled-label-text-color]="'#FFFFFF'"
+        [style.--mat-button-filled-container-height]="'60px'"
+        [style.--mat-button-filled-container-width]="'200px'">
+        {{ 'home.hero.cta' | t }}
+        <span class="arrow" aria-hidden="true"></span>
+      </button>
+    </div>
   </div>
 </div>
-

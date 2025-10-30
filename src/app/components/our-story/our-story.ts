@@ -1,31 +1,32 @@
 import { Component, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
+import { TranslatePipe } from '../../shared/i18n/translate.pipe';
 
 @Component({
   selector: 'app-our-story',
+  standalone: true,
   templateUrl: './our-story.html',
-  styleUrl: './our-story.css'
+  styleUrls: ['./our-story.css'],
+  imports: [TranslatePipe]
 })
 export class OurStory implements AfterViewInit, OnDestroy {
   showBackTop = false;
   private scroller: HTMLElement | Window = window;
+
+  constructor(private zone: NgZone) {}
+
   private onScrollHandler = () => {
     const y = this.scroller instanceof Window
       ? (window.scrollY || document.documentElement.scrollTop)
       : this.scroller.scrollTop;
-    // rientra nella zona Angular per aggiornare la view
+
     this.zone.run(() => this.showBackTop = y > 380);
   };
 
-  constructor(private zone: NgZone) {}
-
   ngAfterViewInit() {
-    // prova a usare il contenitore di Angular Material
     const el = document.querySelector('.mat-sidenav-content') as HTMLElement | null;
     if (el) this.scroller = el;
 
-    // ascolta lo scroll del target giusto
     this.scroller.addEventListener('scroll', this.onScrollHandler, { passive: true });
-    // inizializza lo stato (se sei già in basso)
     this.onScrollHandler();
   }
 

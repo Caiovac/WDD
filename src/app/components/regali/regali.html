@@ -1,11 +1,11 @@
 <!-- HERO -->
 <section class="regali-hero">
-  <img class="regali-hero__img" src="/regali.png" alt="Caio & Tatiana" />
+  <img class="regali-hero__img" src="/assets/regali.png" [alt]="'gifts.hero.altHero' | t" />
   <div class="regali-hero__overlay"></div>
   <div class="regali-hero__content">
-    <div class="eyebrow">CON IL VOSTRO AFFETTO</div>
-    <h1 class="title">I REGALI</h1>
-    <p class="lead">Il regalo più grande siete voi. 🤍</p>
+    <div class="eyebrow">{{ 'gifts.hero.eyebrow' | t }}</div>
+    <h1 class="title">{{ 'gifts.hero.title' | t }}</h1>
+    <p class="lead">{{ 'gifts.hero.lead' | t }}</p>
   </div>
 </section>
 
@@ -15,44 +15,51 @@
     <header class="iban-card__head">
       <div class="coin">€</div>
       <div class="iban-card__titles">
-        <h2>Bonifico IBAN</h2>
+        <h2>{{ 'gifts.card.ibanTitle' | t }}</h2>
       </div>
     </header>
 
     <div class="iban-box">
       <div class="row">
-        <div class="label">Intestatario</div>
+        <div class="label">{{ 'gifts.fields.beneficiary' | t }}</div>
         <div class="value">{{ beneficiary }}</div>
       </div>
 
       <div class="row">
-        <div class="label">IBAN</div>
+        <div class="label">{{ 'gifts.fields.iban' | t }}</div>
         <div class="value value--code">
           <code>{{ formattedIban }}</code>
-          <button class="icon-btn" (click)="copy(ibanRaw)" aria-label="Copia IBAN">
-            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          <button class="icon-btn"
+                  (click)="copy(ibanRaw)"
+                  [attr.aria-label]="'gifts.aria.copyIban' | t">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+            </svg>
           </button>
         </div>
       </div>
 
       <div class="row">
-        <div class="label">Banca</div>
+        <div class="label">{{ 'gifts.fields.bank' | t }}</div>
         <div class="value">{{ bankName }}</div>
       </div>
 
-      <!-- CAUSALE (auto-aggiornata) -->
       <div class="row">
-        <div class="label">Causale</div>
+        <div class="label">{{ 'gifts.fields.cause' | t }}</div>
         <div class="value value--code">
           <code>{{ cause }}</code>
-          <button class="icon-btn" (click)="copy(cause)" aria-label="Copia causale">
-            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          <button class="icon-btn"
+                  (click)="copy(cause)"
+                  [attr.aria-label]="'gifts.aria.copyCause' | t">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M16 1H4c-1.1 0-2 .9-2 2v12h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+            </svg>
           </button>
         </div>
       </div>
 
       <!-- IDEE REGALO -->
-      <div class="block-title">Idea regalo</div>
+      <div class="block-title">{{ 'gifts.idea.title' | t }}</div>
       <div class="ideas-select">
         <button
           class="idea-chip"
@@ -60,31 +67,35 @@
           [class.active]="selectedIdeaId === it.id"
           (click)="pickIdea(it)"
         >
-          <img [src]="it.img" [alt]="it.name" />
-          <span>{{ it.name }}</span>
+          <img [src]="it.img" [alt]="('gifts.ideas.' + it.id) | t" />
+          <span>{{ ('gifts.ideas.' + it.id) | t }}</span>
         </button>
 
-        <button class="idea-chip idea-chip--altro" [class.active]="customIdeaEnabled" (click)="enableCustomIdea()">
-          <span>Altro…</span>
+        <button class="idea-chip idea-chip--altro"
+                [class.active]="customIdeaEnabled"
+                (click)="enableCustomIdea()">
+          <span>{{ 'gifts.idea.other' | t }}</span>
         </button>
       </div>
 
       <div class="custom-idea" *ngIf="customIdeaEnabled">
         <input type="text"
-               placeholder="Scrivi qui la tua idea regalo…"
+               [placeholder]="'gifts.idea.placeholder' | t"
                [(ngModel)]="customIdea"
                (input)="updateCause()" />
       </div>
 
       <!-- IMPORTI -->
       <div class="quick">
-        <span class="muted">Importo:</span>
+        <span class="muted">{{ 'gifts.amount.label' | t }}</span>
         <button class="chip" *ngFor="let a of amounts"
                 [class.active]="selectedAmount === a"
                 (click)="pickAmount(a)">€ {{ a }}</button>
 
-        <button class="chip chip--ghost" [class.active]="customAmountEnabled" (click)="enableCustomAmount()">
-          Altro importo…
+        <button class="chip chip--ghost"
+                [class.active]="customAmountEnabled"
+                (click)="enableCustomAmount()">
+          {{ 'gifts.amount.other' | t }}
         </button>
       </div>
 
@@ -93,19 +104,19 @@
           € <input type="number" min="1" step="1" inputmode="numeric"
                    [(ngModel)]="customAmount"
                    (input)="updateCause()"
-                   placeholder="es. 180" />
+                   placeholder="180" />
         </label>
         <br>
-        <small class="muted">L’importo personalizzato verrà aggiunto alla causale.</small>
+        <small class="muted">{{ 'gifts.amount.customNote' | t }}</small>
       </div>
 
       <div class="actions">
-        <button class="btn" (click)="copyFull()">Copia tutti i dati</button>
+        <button class="btn" (click)="copyFull()">{{ 'gifts.actions.copyAll' | t }}</button>
       </div>
 
       <div class="qr" *ngIf="showQr && qrSrc">
-        <img [src]="qrSrc" width="220" height="220" alt="QR con dati bonifico" />x\
-        <div class="qr-note">Contiene IBAN, intestatario e causale.</div>
+        <img [src]="qrSrc" width="220" height="220" [alt]="'gifts.qr.alt' | t" />
+        <div class="qr-note">{{ 'gifts.qr.note' | t }}</div>
       </div>
     </div>
   </article>

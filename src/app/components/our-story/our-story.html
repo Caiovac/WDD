@@ -1,66 +1,62 @@
 <section class="story-hero" id="top">
   <div class="story-container">
-    <p class="story-kicker">COM’È BELLO RICORDARE</p>
-    <h1 class="story-title">La nostra storia</h1>
-
-    <p class="story-lead">
-      Quando ci siamo conosciuti non immaginavamo che un giorno avremmo vissuto il nostro grande sogno: il matrimonio.
-      Il giorno si avvicina, il cuore batte forte e scorrono i ricordi di tutto ciò che abbiamo vissuto e costruito.
-      È bello ricordare ogni piccolo pezzo della nostra storia d’amore.
-    </p>
+    <p class="story-kicker">{{ 'ourStory.hero.kicker' | t }}</p>
+    <h1 class="story-title">{{ 'ourStory.hero.title' | t }}</h1>
+    <p class="story-lead">{{ 'ourStory.hero.lead' | t }}</p>
   </div>
 </section>
 
 <figure class="story-photo">
-  <!-- Sostituisci con la tua foto -->
-  <img src="/Prayer.png" alt="Noi due" loading="lazy" decoding="async"/>
+  <img src="/assets/Prayer.png"
+       [alt]="'ourStory.collage.altHero' | t"
+       loading="lazy" decoding="async"/>
 </figure>
+
 <section class="story-hero">
   <div class="story-container">
-    <p class="story-kicker">IL NOSTRO LUOGO</p>
-    <h2 class="story-title">Il luogo dove tutto è iniziato</h2>
-
-    <p class="story-lead">
-      Tra queste luci e queste canzoni ci siamo incontrati. In mezzo alle preghiere,
-      agli abbracci della domenica e ai sorrisi dopo il culto, è nato qualcosa di semplice e forte.
-      Qui abbiamo imparato a servire, a credere insieme, a dire “ci sono” l’uno per l’altra.
-      Ogni volta che entriamo in chiesa, ritroviamo quel primo sguardo e capiamo che casa non è solo un posto:
-      è la presenza di Dio e le persone accanto a noi.
-    </p>
+    <p class="story-kicker">{{ 'ourStory.place.kicker' | t }}</p>
+    <h2 class="story-title">{{ 'ourStory.place.title' | t }}</h2>
+    <p class="story-lead">{{ 'ourStory.place.lead' | t }}</p>
   </div>
 </section>
 
 <section class="story-collage">
   <div class="collage-grid">
     <figure class="collage-item ph-a">
-      <img src="tatiana.jpeg" alt="Sul palco durante la lode" loading="lazy" decoding="async">
+      <img src="/assets/tatiana.jpeg"
+           [alt]="'ourStory.collage.altA' | t"
+           loading="lazy" decoding="async">
     </figure>
 
     <figure class="collage-item ph-b">
-      <img src="churchGuys.jpeg" alt="Amici che chiacchierano dopo il culto" loading="lazy" decoding="async">
+      <img src="/assets/churchGuys.jpeg"
+           [alt]="'ourStory.collage.altB' | t"
+           loading="lazy" decoding="async">
     </figure>
 
     <figure class="collage-item ph-c">
-      <img src="caio.jpeg" alt="Momento di preghiera insieme" loading="lazy" decoding="async">
+      <img src="/assets/caio.jpeg"
+           [alt]="'ourStory.collage.altC' | t"
+           loading="lazy" decoding="async">
     </figure>
   </div>
-  <figcaption class="collage-caption">I nostri momenti: musica, amicizia, preghiera.</figcaption>
+  <figcaption class="collage-caption">
+    {{ 'ourStory.collage.caption' | t }}
+  </figcaption>
 </section>
 
-
-
-
 <div class="story-footer">
-<!-- Pulsante Torna su (overlay) -->
-<button
-  class="backtotop"
-  [class.visible]="showBackTop"
-  (click)="scrollTop()"
-  aria-label="Torna all’inizio"
-  title="Torna all’inizio">
-  <!-- se usi Angular Material puoi mettere <mat-icon>keyboard_arrow_up</mat-icon> -->
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-    <path d="M12 8l-6 6h4v6h4v-6h4z" fill="currentColor"/>
-  </svg>
-</button>  <span class="back-top-label" (click)="scrollTop()">Torna su</span>
+  <button
+    class="backtotop"
+    [class.visible]="showBackTop"
+    (click)="scrollTop()"
+    [attr.aria-label]="'ourStory.backTop.aria' | t"
+    [attr.title]="'ourStory.backTop.aria' | t">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 8l-6 6h4v6h4v-6h4z" fill="currentColor"/>
+    </svg>
+  </button>
+  <span class="back-top-label" (click)="scrollTop()">
+    {{ 'ourStory.backTop.label' | t }}
+  </span>
 </div>
