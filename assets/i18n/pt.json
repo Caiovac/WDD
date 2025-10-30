@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "home": "Início",
+    "ourStory": "Nossa história",
+    "gifts": "Presentes",
+    "itinerary": "Itinerário",
+    "menu": "Cardápio",
+    "gallery": "Galeria"
+  },
+  "lang": {
+    "IT": "Italiano",
+    "PT": "Português",
+    "ES": "Espanhol",
+    "EN": "Inglês"
+  },
+  "home": {
+    "hero": {
+      "message": "Faça esta viagem com a gente",
+      "saveDate": "Reserve a data: {{date}}",
+      "address": "Endereço: {{place}}",
+      "note": "Estamos muito felizes, contando os dias ✨",
+      "cta": "Nossa história",
+      "ctaAria": "Ir para nossa história",
+      "altNames": "Caio & Tatiana",
+      "altBoarding": "Save the Date"
+    }
+  },
+  "ourStory": {
+    "hero": {
+      "kicker": "QUÉ HERMOSO ES RECORDAR",
+      "title": "Nuestra historia",
+      "lead": "Quando nos conhecemos, não imaginávamos que um dia encontraríamos o nosso companheiro de viagem.\n\nTudo começou com uma bela amizade, até que um dia descobrimos que estávamos lado a lado da forma mais verdadeira.\n\nDuas almas tímidas, dois corações que sonhavam em caminhar juntos.\n\nCom o tempo entendemos que não foi por acaso, mas que Deus nos colocou um na vida do outro por um motivo e um propósito.\n\nPor meio Dele compreendemos que aquela amizade era apenas o começo de algo mais profundo.\n\nReconhecemos o Seu desejo: ver-nos unidos para sempre, no casamento, sob a Sua bênção."
+    },
+    "place": {
+      "kicker": "NUESTRO LUGAR",
+      "title": "El lugar donde todo comenzó",
+      "lead": "Entre luces y canciones nos conocimos. En medio de oraciones, abrazos del domingo y sonrisas después del culto, nació algo sencillo y fuerte. Aquí aprendimos a servir, a creer juntos, a decir “estoy aquí” el uno para el otro. Cada vez que entramos a la iglesia, encontramos aquella primera mirada y entendemos que hogar no es solo un lugar: es la presencia de Dios y las personas a nuestro lado."
+    },
+    "collage": {
+      "caption": "Nuestros momentos: música, amistad, oración.",
+      "altA": "En el escenario durante la alabanza",
+      "altB": "Amigos conversando después del culto",
+      "altC": "Momento de oración juntos",
+      "altHero": "Nosotros dos"
+    },
+    "backTop": {
+      "aria": "Volver arriba",
+      "label": "Volver arriba"
+    }
+  },
+  "gifts": {
+    "hero": {
+      "eyebrow": "COM O SEU CARINHO",
+      "title": "OS PRESENTES",
+      "lead": "O maior presente é a sua presença. 🤍",
+      "altHero": "Caio & Tatiana"
+    },
+    "card": { "ibanTitle": "Transferência (IBAN)" },
+    "fields": {
+      "beneficiary": "Titular",
+      "iban": "IBAN",
+      "bank": "Banco",
+      "cause": "Descrição"
+    },
+    "idea": {
+      "title": "Ideia de presente",
+      "other": "Outro…",
+      "placeholder": "Digite aqui a sua ideia de presente…"
+    },
+    "ideas": {
+      "viaggio": "Viagem de lua de mel",
+      "cena": "Jantar especial",
+      "casa": "Casa"
+    },
+    "amount": {
+      "label": "Valor:",
+      "other": "Outro valor…",
+      "customNote": "O valor personalizado será adicionado à descrição."
+    },
+    "actions": { "copyAll": "Copiar todos os dados" },
+    "qr": {
+      "alt": "QR com dados da transferência",
+      "note": "Contém IBAN, titular e descrição."
+    },
+    "toast": { "copied": "Copiado para a área de transferência" },
+    "aria": { "copyIban": "Copiar IBAN", "copyCause": "Copiar descrição" },
+    "defaultCause": "Presente de casamento — Caio & Tatiana"
+  },
+  "loader": {
+    "text": "Carregando…",
+    "ariaLabel": "Carregando a página"
+  }
+}
