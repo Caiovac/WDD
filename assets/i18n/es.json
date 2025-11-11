@@ -5,7 +5,8 @@
     "gifts": "Regalos",
     "itinerary": "Itinerario",
     "menu": "Menú",
-    "gallery": "Galería"
+    "gallery": "Galería",
+    "streaming": "Transmisión"
   },
   "lang": {
     "IT": "Italiano",
@@ -90,5 +91,21 @@
   "loader": {
     "text": "Cargando…",
     "ariaLabel": "Cargando la página"
+  },
+  "streaming": {
+    "hero": {
+      "title": "En vivo / Transmisión",
+      "subtitle": "Mira la transmisión en vivo de nuestra boda."
+    },
+    "cta": {
+      "watch": "Ver en YouTube"
+    },
+    "altNote": {
+      "prefix": "Si el reproductor no se carga,",
+      "link": "ábrelo directamente en YouTube"
+    },
+    "aria": {
+      "watch": "Abrir el video en YouTube"
+    }
   }
 }

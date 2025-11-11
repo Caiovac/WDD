@@ -5,7 +5,8 @@
     "gifts": "Presentes",
     "itinerary": "Itinerário",
     "menu": "Cardápio",
-    "gallery": "Galeria"
+    "gallery": "Galeria",
+    "streaming": "Transmissão"
   },
   "lang": {
     "IT": "Italiano",
@@ -89,5 +90,24 @@
   "loader": {
     "text": "Carregando…",
     "ariaLabel": "Carregando a página"
+  },
+  
+  "streaming": {
+    "hero": {
+      "title": "Ao vivo / Transmissão",
+      "subtitle": "Assista à transmissão ao vivo do nosso casamento."
+    },
+    "cta": {
+      "watch": "Assistir no YouTube"
+    },
+    "altNote": {
+      "prefix": "Se o player não carregar,",
+      "link": "abra diretamente no YouTube"
+    },
+    "aria": {
+      "watch": "Abrir o vídeo no YouTube"
+    }
   }
+
+
 }
