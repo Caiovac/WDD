@@ -14,7 +14,7 @@
 /* --- Header --- (come già avevi) */
 .brand-header.center{ display:grid; grid-auto-flow:row; justify-items:center; gap:50px; }
 .brand-logo{ width:44px; height:44px; border-radius:12px; box-shadow:0 6px 18px #0001; }
-.brand-title{ margin:0; font-weight:800; letter-spacing:.2px; text-align:center;   font-family: 'Cinzel', serif; color:  #0E294D;}
+.brand-title{ margin:0; font-weight:800; letter-spacing:.2px; text-align:center;   font-family: 'Cinzel', serif; color:  #af4261;}
 .brand-sub{ margin:2px 0 0; opacity:.75; font-size:.95rem; text-align:center; }
 .yt-btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; text-decoration:none; background:#dea193; color:#fff; font-weight:700; letter-spacing:.2px; box-shadow:0 8px 22px #af426144;font-family: 'Cinzel', serif; }
 
