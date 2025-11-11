@@ -48,12 +48,15 @@ export class NavBar implements OnInit, AfterViewInit, OnDestroy {
     { label: 'nav.home',     link: '/std/home' },
     { label: 'nav.ourStory', link: '/std/our-story' },
     { label: 'nav.gifts',    link: '/std/regali' },
+    { label: 'nav.streaming', link: '/std/streaming' },
+
   ];
 
   private prmItems: MenuItem[] = [
     { label: 'nav.home',     link: '/prm/home' },
     { label: 'nav.ourStory', link: '/prm/our-story' },
     { label: 'nav.gifts',    link: '/prm/regali' },
+    { label: 'nav.streaming', link: '/prm/streaming' },
     // { label: 'nav.itinerary', link: '/prm/itinerario' },
     // { label: 'nav.gallery',   link: '/prm/gallery' },
   ];

@@ -1,0 +1,71 @@
+/* --- Pagina --- */
+.streaming-page{
+  background:#F6EFE5;
+  min-height:calc(110dvh - 64px);
+  padding:clamp(24px,6vh,64px) 16px 56px;
+  display:grid;
+  justify-items:center;
+  align-content:start;
+  gap:16px;
+  overflow-x:clip;                 /* impedisce lo scroll orizzontale */
+}
+.streaming-page, .streaming-page *{ box-sizing:border-box; }
+
+/* --- Header --- (come già avevi) */
+.brand-header.center{ display:grid; grid-auto-flow:row; justify-items:center; gap:50px; }
+.brand-logo{ width:44px; height:44px; border-radius:12px; box-shadow:0 6px 18px #0001; }
+.brand-title{ margin:0; font-weight:800; letter-spacing:.2px; text-align:center;   font-family: 'Cinzel', serif; color:  #0E294D;}
+.brand-sub{ margin:2px 0 0; opacity:.75; font-size:.95rem; text-align:center; }
+.yt-btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; text-decoration:none; background:#dea193; color:#fff; font-weight:700; letter-spacing:.2px; box-shadow:0 8px 22px #af426144;font-family: 'Cinzel', serif; }
+
+/* --- Wrapper decorato --- */
+.player-wrap{
+  position:relative;
+  width:min(1100px,100%);
+  margin:0 auto;
+  padding:clamp(8px,1.8vw,18px);  /* spazio per i fiori */
+  background:transparent;         /* ✅ niente “cartolina bianca” */
+  overflow:visible;               /* ✅ lascia sbordare i fiori */
+}
+
+/* Fiori (non tagliati, niente click-block) */
+.floral{
+  position:absolute;
+  width:clamp(60px,10vw,120px);
+  height:auto;
+  opacity:.9;
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,.10));
+  pointer-events:none;
+  z-index:2;
+}
+.floral-tl{ top:0; left:0; transform:translate(-20%,-20%); }
+.floral-tr{ top:0; right:0; transform:translate(20%,-20%); }
+.floral-bl{ bottom:0; left:0; transform:translate(-20%,20%); }
+.floral-br{ bottom:0; right:0; transform:translate(20%,20%); }
+
+/* --- Player (clip perfetto + ombra) --- */
+.video-16x9{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:16px;
+  overflow:hidden;                /* ✅ arrotonda e clippa l’IFRAME */
+  background:#000;                /* sfondo nero se letterboxing */
+  box-shadow:0 20px 40px rgba(0,0,0,.12); /* ombra solo al player */
+  z-index:1;
+}
+.video-16x9 iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  border:0; display:block;
+}
+
+/* Nota */
+.alt-note{ margin:8px 2px 0; font-size:.95rem; opacity:.85; text-align:center; }
+.alt-note a{ color:#af4261; font-weight:700; text-decoration:none; }
+.alt-note a:hover{ text-decoration:underline; }
+
+/* Mobile */
+@media (max-width:640px){
+  .yt-btn{ width:100%; justify-content:center; }
+}

@@ -8,8 +8,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./streaming-section.css']
 })
 export class StreamingSection {
-  @Input() videoId!: string;                 // <-- richiesto
-  @Input() title = 'Diretta / Streaming';    // <-- richiesto
+  @Input() videoId!: string;
+  @Input() title = 'Diretta';    
   @Input() previewOnly = false;
 
   thumbUrl = '';

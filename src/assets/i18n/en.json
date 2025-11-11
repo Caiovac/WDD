@@ -5,7 +5,8 @@
     "gifts": "Gifts",
     "itinerary": "Itinerary",
     "menu": "Menu",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "streaming": "Streaming"
   },
   "lang": {
     "IT": "Italian",
@@ -91,6 +92,22 @@
   "loader": {
     "text": "Loading…",
     "ariaLabel": "Page loading"
+  },
+  "streaming": {
+    "hero": {
+      "title": "Live / Streaming",
+      "subtitle": "Watch the live stream of our wedding."
+    },
+    "cta": {
+      "watch": "Watch on YouTube"
+    },
+    "altNote": {
+      "prefix": "If the player doesn't load,",
+      "link": "open it directly on YouTube"
+    },
+    "aria": {
+      "watch": "Open the video on YouTube"
+    }
   }
 
 }

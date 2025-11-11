@@ -5,7 +5,8 @@
     "gifts": "Regali",
     "itinerary": "Itinerario",
     "menu": "Menu",
-    "gallery": "Gallery"
+    "gallery": "Gallery",
+    "streaming": "Streaming"
   },
   "lang": {
     "IT": "Italiano",
@@ -91,6 +92,23 @@
   "loader": {
     "text": "Caricamento…",
     "ariaLabel": "Pagina in caricamento"
+  },
+  
+  "streaming": {
+    "hero": {
+      "title": "Diretta / Streaming",
+      "subtitle": "Guarda la diretta del nostro matrimonio."
+    },
+    "cta": {
+      "watch": "Guarda su YouTube"
+    },
+    "altNote": {
+      "prefix": "Se il player non si carica,",
+      "link": "apri direttamente su YouTube"
+    },
+    "aria": {
+      "watch": "Apri il video su YouTube"
+    }
   }
 }
 

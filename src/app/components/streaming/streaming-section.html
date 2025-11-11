@@ -1,5 +1,75 @@
-<app-streaming-section
-  [videoId]="videoId"
-  [title]="'Diretta / Streaming'"
-  [previewOnly]="false">
-</app-streaming-section>
+<section class="streaming-page">
+  <!-- HEADER CENTRATO -->
+  <header class="brand-header center">
+    <div class="brand-text">
+      <h1 class="brand-title">
+        {{ title || ('streaming.hero.title' | t) }}
+      </h1>
+
+      <!-- se passi [subtitle], usa quello; altrimenti la traduzione -->
+      <p class="brand-sub" *ngIf="subtitle; else i18nSub">
+        {{ subtitle }}
+      </p>
+      <ng-template #i18nSub>
+        <p class="brand-sub">{{ 'streaming.hero.subtitle' | t }}</p>
+      </ng-template>
+    </div>
+
+    <a class="yt-btn"
+       [href]="watchUrl"
+       target="_blank"
+       rel="noopener"
+       [attr.aria-label]="'streaming.aria.watch' | t">
+      {{ 'streaming.cta.watch' | t }}
+    </a>
+  </header>
+
+  <!-- WRAP CON FIORI AGLI ANGOLI -->
+  <div class="player-wrap">
+    <!-- 4 angoli: inline SVG, non serve asset -->
+    <svg class="floral floral-tl" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <path d="M5,90 C15,60 35,45 60,40 C50,30 45,20 50,10 C60,20 68,32 70,45 C80,35 90,30 95,28"
+            fill="none" stroke="#b57d9a" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="10" r="4" fill="#d49fb8"/>
+      <circle cx="70" cy="45" r="4" fill="#d49fb8"/>
+    </svg>
+    <svg class="floral floral-tr" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <path d="M95,90 C85,60 65,45 40,40 C50,30 55,20 50,10 C40,20 32,32 30,45 C20,35 10,30 5,28"
+            fill="none" stroke="#b57d9a" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="10" r="4" fill="#d49fb8"/>
+      <circle cx="30" cy="45" r="4" fill="#d49fb8"/>
+    </svg>
+    <svg class="floral floral-bl" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <path d="M5,10 C15,40 35,55 60,60 C50,70 45,80 50,90 C60,80 68,68 70,55 C80,65 90,70 95,72"
+            fill="none" stroke="#b57d9a" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="90" r="4" fill="#d49fb8"/>
+      <circle cx="70" cy="55" r="4" fill="#d49fb8"/>
+    </svg>
+    <svg class="floral floral-br" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <path d="M95,10 C85,40 65,55 40,60 C50,70 55,80 50,90 C40,80 32,68 30,55 C20,65 10,70 5,72"
+            fill="none" stroke="#b57d9a" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="90" r="4" fill="#d49fb8"/>
+      <circle cx="30" cy="55" r="4" fill="#d49fb8"/>
+    </svg>
+
+    <!-- PLAYER -->
+    <div class="video-16x9">
+      <iframe
+        [src]="playerUrl"
+        title="YouTube player"
+        frameborder="0"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <p class="alt-note">
+    {{ 'streaming.altNote.prefix' | t }}
+    <a [href]="watchUrl" target="_blank" rel="noopener">
+      {{ 'streaming.altNote.link' | t }}
+    </a>.
+  </p>
+</section>

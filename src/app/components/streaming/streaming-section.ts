@@ -1,24 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }    from '@angular/router';
-import { StreamingSection }  from '../../shared/streaming-section/streaming-section';
+import { Component, Input } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { NgIf } from '@angular/common';
+import { TranslatePipe } from '../../shared/i18n/translate.pipe'; // 👈 pipe "t"
 
 @Component({
-  selector: 'app-streaming',
+  selector: 'app-streaming-section',
   standalone: true,
-  imports: [StreamingSection],
-  templateUrl: './streaming.html',
+  imports: [NgIf, TranslatePipe],   // 👈 importa la pipe
+  templateUrl: './streaming-section.html',
+  styleUrls: ['./streaming-section.css']
 })
-export class Streaming implements OnInit {
-  // default (cambialo se vuoi)
-  videoId = 'KUVErTb94K0';
+export class StreamingSection {
+  @Input() videoId: string = 'jeHNEfooias';
 
-  constructor(private route: ActivatedRoute) {}
+  // lascio opzionali così fai fallback alle traduzioni nel template
+  @Input() title?: string;
+  @Input() subtitle?: string;
+
+  playerUrl!: SafeResourceUrl;
+  watchUrl!: string;
+
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
-    // supporta /prm/streaming/:id e /prm/streaming?v=ID
-    const p = this.route.snapshot.paramMap.get('id');
-    const q = this.route.snapshot.queryParamMap.get('v');
-    if (p) this.videoId = p;
-    if (q) this.videoId = q;
+    const raw = `https://www.youtube-nocookie.com/embed/${this.videoId}?rel=0&modestbranding=1&playsinline=1`;
+    this.playerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(raw);
+    this.watchUrl  = `https://www.youtube.com/watch?v=${this.videoId}`;
   }
 }
