@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-itinerario',
-  imports: [],
+  standalone: true,
   templateUrl: './itinerario.html',
-  styleUrl: './itinerario.css'
+  styleUrls: ['./itinerario.css'],
 })
-export class Itinerario {
-
-}
+export class Itinerario {}

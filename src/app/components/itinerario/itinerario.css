@@ -1,0 +1,41 @@
+:host { display:block; }
+
+.itinerary-page{
+  --paper: #f6efe5;
+  --card-max: 720px;                   /* larghezza massima su desktop */
+  --header-h: 25px;                     /* se hai navbar fissa, metti es. 64px */
+  --pad-y: clamp(12px, 2.5vw, 0px);   /* padding verticale */
+  --pad-x: clamp(16px, 4vw, 56px);     /* padding orizzontale */
+  --bump: 24px;                        /* “pelo” in più di altezza utile */
+
+  height: calc(100dvh - var(--header-h));   /* container esattamente a viewport */
+  display: grid;
+  place-items: center;                  /* centra sia orizz. che vert. */
+  padding: var(--pad-y) var(--pad-x);
+  background: var(--paper);
+  overflow: hidden;                     /* evita micro-scroll da arrotondamenti */
+}
+
+.itinerary-card{
+  margin: 0;
+  display: inline-block;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 18px 48px rgba(0,0,0,.18), 0 4px 14px rgba(0,0,0,.08);
+}
+
+.itinerary-img{
+  display: block;
+  /* non più larga di così… */
+  max-width: min(var(--card-max), 88vw);
+  /* …e soprattutto non più alta della finestra (con un “pelo” extra) */
+  max-height: calc(90dvh - var(--header-h) - var(--pad-y)*2 + var(--bump));
+  width: auto;
+  height: auto;
+}
+
+/* fallback per browser senza dvh */
+@supports not (height: 100dvh) {
+  .itinerary-page { height: calc(100vh - var(--header-h)); }
+  .itinerary-img  { max-height: calc(100vh - var(--header-h) - var(--pad-y)*2 + var(--bump)); }
+}

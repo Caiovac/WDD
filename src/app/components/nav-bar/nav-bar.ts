@@ -57,7 +57,7 @@ export class NavBar implements OnInit, AfterViewInit, OnDestroy {
     { label: 'nav.ourStory', link: '/prm/our-story' },
     { label: 'nav.gifts',    link: '/prm/regali' },
     { label: 'nav.streaming', link: '/prm/streaming' },
-    // { label: 'nav.itinerary', link: '/prm/itinerario' },
+    { label: 'nav.itinerary', link: '/prm/itinerario' },
     // { label: 'nav.gallery',   link: '/prm/gallery' },
   ];
 
